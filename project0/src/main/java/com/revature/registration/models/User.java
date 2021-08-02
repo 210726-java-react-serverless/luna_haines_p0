@@ -1,4 +1,4 @@
-package com.revature.registration.users;
+package com.revature.registration.models;
 
 public abstract class User {
 
