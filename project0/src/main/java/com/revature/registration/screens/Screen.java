@@ -1,2 +1,8 @@
-package com.revature.registration.screens;public class Screen {
+package com.revature.registration.screens;
+
+public abstract class Screen {
+
+    protected String name;
+    protected String route;
+
 }
