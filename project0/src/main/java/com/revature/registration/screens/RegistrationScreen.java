@@ -6,10 +6,10 @@ import com.revature.registration.util.ScreenRouter;
 import java.io.BufferedReader;
 import java.sql.SQLOutput;
 
-public class StudentRegistrationScreen extends Screen {
+public class RegistrationScreen extends Screen {
 
-    public StudentRegistrationScreen(BufferedReader consoleReader, ScreenRouter router) {
-        super("Student Registration Screen", "/studentregistration", consoleReader, router);
+    public RegistrationScreen(BufferedReader consoleReader, ScreenRouter router) {
+        super("Registration Screen", "/registration", consoleReader, router);
     }
 
     @Override
