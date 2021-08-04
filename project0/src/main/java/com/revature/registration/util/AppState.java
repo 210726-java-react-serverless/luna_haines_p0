@@ -5,7 +5,8 @@ public class AppState {
     private boolean appRunning;
     private ScreenRouter router;
 
-    public void startup {
+    public void startup() {
+
         router.navigate("/welcome");
 
         while (appRunning) {
@@ -14,7 +15,6 @@ public class AppState {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
 
         }
     }

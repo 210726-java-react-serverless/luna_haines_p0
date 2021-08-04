@@ -28,8 +28,8 @@ public class WelcomeScreen extends Screen {
                 router.navigate("/login");
 
             case "2":
-                System.out.println("User Registration goes here");
-                router.navigate("/userregistration");
+                System.out.println("Student Registration goes here");
+                router.navigate("/studentregistration");
             case "3":
                 System.out.println("Exiting Application");
                 break;
