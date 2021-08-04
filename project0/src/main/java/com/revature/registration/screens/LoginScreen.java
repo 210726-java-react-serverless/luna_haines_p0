@@ -26,8 +26,10 @@ public class LoginScreen extends Screen {
         // TODO authenticate users via database queries
         switch (userType) {
             case 1:
+                // Authentication here
                 router.navigate("/facultydashboard");
             case 2:
+                //Authentication here
                 router.navigate("/studentdashboard");
             default:
                 System.out.println("Please enter a valid input");
