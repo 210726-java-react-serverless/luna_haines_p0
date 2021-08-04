@@ -1,5 +1,7 @@
 package com.revature.registration.screens;
 
+import com.revature.registration.util.ScreenRouter;
+
 import java.io.BufferedReader;
 
 public abstract class Screen {
@@ -7,11 +9,13 @@ public abstract class Screen {
     protected String name;
     protected String route;
     protected BufferedReader consoleReader;
+    protected ScreenRouter router;
 
-    public Screen(String name, String route, BufferedReader consoleReader) {
+    public Screen(String name, String route, BufferedReader consoleReader, ScreenRouter router) {
         this.name = name;
         this.route = route;
         this.consoleReader = consoleReader;
+        this.router = router;
     }
 
     public String getName() {

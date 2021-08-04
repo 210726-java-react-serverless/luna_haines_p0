@@ -1,11 +1,13 @@
 package com.revature.registration.screens;
 
+import com.revature.registration.util.ScreenRouter;
+
 import java.io.BufferedReader;
 
 public class WelcomeScreen extends Screen {
 
-    public WelcomeScreen(BufferedReader consoleReader) {
-        super("Welcome Screen", "/welcome", consoleReader);
+    public WelcomeScreen(BufferedReader consoleReader, ScreenRouter router) {
+        super("Welcome Screen", "/welcome", consoleReader, router);
     }
 
     @Override
@@ -20,13 +22,14 @@ public class WelcomeScreen extends Screen {
 
         switch (userSelection) {
 
-            // TODO implement a screen router
+
             case "1":
                 System.out.println("Login goes here");
-                break;
+                router.navigate("/login");
+
             case "2":
                 System.out.println("User Registration goes here");
-                break;
+                router.navigate("/userregistration");
             case "3":
                 System.out.println("Exiting Application");
                 break;
