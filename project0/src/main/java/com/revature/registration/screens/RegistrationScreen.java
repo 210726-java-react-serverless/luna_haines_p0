@@ -32,6 +32,7 @@ public class RegistrationScreen extends Screen {
 
         // TODO create student here, save their info to the database
 
+        router.navigate("/welcome");
     }
 
     // TODO store user info in a database
