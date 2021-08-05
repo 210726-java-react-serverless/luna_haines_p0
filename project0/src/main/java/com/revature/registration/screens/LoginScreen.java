@@ -28,9 +28,11 @@ public class LoginScreen extends Screen {
             case 1:
                 // Authentication here
                 router.navigate("/facultydashboard");
+                break;
             case 2:
                 //Authentication here
                 router.navigate("/studentdashboard");
+                break;
             default:
                 System.out.println("Please enter a valid input");
         }

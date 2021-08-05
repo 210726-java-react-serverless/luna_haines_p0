@@ -21,10 +21,13 @@ public class FacultyDashboard extends Screen {
         switch (Integer.parseInt(userChoice)) {
             case 1:
                 System.out.println("Add a Course");
+                break;
             case 2:
                 System.out.println("Update a Course");
+                break;
             case 3:
                 System.out.println("Remove a Course");
+                break;
             default:
                 System.out.println("Please enter a valid input");
         }
