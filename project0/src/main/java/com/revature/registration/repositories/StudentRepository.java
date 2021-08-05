@@ -1,18 +1,20 @@
 package com.revature.registration.repositories;
 
-public class StudentRepository implements CrudRepository{
+import com.revature.registration.models.Student;
+
+public class StudentRepository implements CrudRepository<Student>{
     @Override
-    public Object findById(int id) {
+    public Student findById(int id) {
         return null;
     }
 
     @Override
-    public Object save(Object newResource) {
+    public Student save(Student newResource) {
         return null;
     }
 
     @Override
-    public boolean update(Object updatedResource) {
+    public boolean update(Student updatedResource) {
         return false;
     }
 
