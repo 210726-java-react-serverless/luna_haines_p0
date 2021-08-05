@@ -8,14 +8,13 @@ public class Student extends User {
     private String lastName;
     private String email;
     private String password;
-    private int id;
+    private int _id;
 
     public Student(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.id = 0; // TODO implement unique id numbers
     }
 
     @Override
@@ -25,7 +24,7 @@ public class Student extends User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", id=" + id +
+                ", id=" + _id +
                 '}';
     }
 
@@ -34,12 +33,12 @@ public class Student extends User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Student student = (Student) o;
-        return id == student.id && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && Objects.equals(email, student.email) && Objects.equals(password, student.password);
+        return _id == student._id && Objects.equals(firstName, student.firstName) && Objects.equals(lastName, student.lastName) && Objects.equals(email, student.email) && Objects.equals(password, student.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, email, password, id);
+        return Objects.hash(firstName, lastName, email, password, _id);
     }
 
     public String getFirstName() {
@@ -75,10 +74,10 @@ public class Student extends User {
     }
 
     public int getId() {
-        return id;
+        return _id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this._id = id;
     }
 }

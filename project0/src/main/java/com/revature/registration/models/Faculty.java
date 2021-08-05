@@ -8,14 +8,13 @@ public class Faculty extends User {
     private String lastName;
     private String email;
     private String password;
-    private int id;
+    private int _id;
 
     public Faculty(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.password = password;
-        this.id = 0; // TODO implement unique id numbers
     }
 
     @Override
@@ -25,7 +24,7 @@ public class Faculty extends User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", id=" + id +
+                ", id=" + _id +
                 '}';
     }
 
@@ -34,12 +33,12 @@ public class Faculty extends User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Faculty faculty = (Faculty) o;
-        return id == faculty.id && Objects.equals(firstName, faculty.firstName) && Objects.equals(lastName, faculty.lastName) && Objects.equals(email, faculty.email) && Objects.equals(password, faculty.password);
+        return _id == faculty._id && Objects.equals(firstName, faculty.firstName) && Objects.equals(lastName, faculty.lastName) && Objects.equals(email, faculty.email) && Objects.equals(password, faculty.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, email, password, id);
+        return Objects.hash(firstName, lastName, email, password, _id);
     }
 
     public String getFirstName() {
@@ -75,10 +74,10 @@ public class Faculty extends User {
     }
 
     public int getId() {
-        return id;
+        return _id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this._id = id;
     }
 }
