@@ -1,14 +1,21 @@
 package com.revature.registration.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import java.util.Objects;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class User {
 
     protected String firstName;
     protected String lastName;
     protected String email;
     protected String password;
-    protected int _id;
+    @JsonSerialize(using = ToStringSerializer.class)
+    protected String id;
 
     @Override
     public String toString() {
@@ -17,7 +24,7 @@ public abstract class User {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", _id=" + _id +
+                ", id=" + id +
                 '}';
     }
 
@@ -26,12 +33,12 @@ public abstract class User {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return _id == user._id && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
+        return id == user.id && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(email, user.email) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(firstName, lastName, email, password, _id);
+        return Objects.hash(firstName, lastName, email, password, id);
     }
 
     public String getFirstName() {
@@ -66,11 +73,11 @@ public abstract class User {
         this.password = password;
     }
 
-    public int get_id() {
-        return _id;
+    public String getId() {
+        return id;
     }
 
-    public void set_id(int _id) {
-        this._id = _id;
+    public void setId(String id) {
+        this.id = id;
     }
 }

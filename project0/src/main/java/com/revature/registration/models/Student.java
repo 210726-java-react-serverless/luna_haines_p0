@@ -8,7 +8,7 @@ public class Student extends User {
     private String lastName;
     private String email;
     private String password;
-    private int _id;
+    private String id;
 
     public Student(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
