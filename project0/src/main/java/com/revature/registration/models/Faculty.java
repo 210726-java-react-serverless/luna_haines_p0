@@ -8,7 +8,7 @@ public class Faculty extends User {
     private String lastName;
     private String email;
     private String password;
-    private int _id;
+    private String id;
 
     public Faculty(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;

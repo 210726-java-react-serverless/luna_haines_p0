@@ -23,11 +23,29 @@ public class UserServices {
         return null;
     }
 
-    public Student loginStudent(Student student) {
+    public static Student loginStudent(String email, String password) {
         return null;
     }
 
-    public Faculty loginFaculty(Faculty faculty) {
+    public static boolean checkStudent(String email, String password) {
+        // TODO check if user with specified information exists
+        return true;
+    }
+
+    public static Faculty loginFaculty(String email, String password) {
         return null;
+    }
+
+    public static boolean checkFaculty(String email, String password) {
+        // TODO check if user with specified information exists
+        return true;
+    }
+
+    public static boolean isStudentValid(String firstName, String lastName, String email, String password) {
+        if (!email.contains("@")) {
+            return false;
+        }
+        // TODO check if email is already in db
+        return true;
     }
 }

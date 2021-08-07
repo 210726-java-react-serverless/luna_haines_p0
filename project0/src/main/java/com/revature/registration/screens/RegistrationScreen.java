@@ -1,6 +1,8 @@
 package com.revature.registration.screens;
 
+import com.revature.registration.models.Student;
 import com.revature.registration.models.User;
+import com.revature.registration.services.UserServices;
 import com.revature.registration.util.ScreenRouter;
 
 import java.io.BufferedReader;
@@ -30,11 +32,16 @@ public class RegistrationScreen extends Screen {
 
         int id = 0; // TODO implement random id values (hashcode?)
 
-        // TODO create student here, save their info to the database
+        if (!UserServices.isStudentValid(firstName,lastName,email,password)) {
+            System.out.println("That information is invalid. Please ensure you entered a valid email address that" +
+                    " isn't already registered.");
+            return;
+        }
+
+        // TODO create student here, persist their info to the database
+
+        Student newStudent = new Student(firstName,lastName,email,password);
 
         router.navigate("/welcome");
     }
-
-    // TODO store user info in a database
-
 }

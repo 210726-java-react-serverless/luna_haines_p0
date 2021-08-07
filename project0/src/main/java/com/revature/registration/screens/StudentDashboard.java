@@ -1,5 +1,6 @@
 package com.revature.registration.screens;
 
+import com.revature.registration.util.AppState;
 import com.revature.registration.util.ScreenRouter;
 
 import java.io.BufferedReader;
@@ -16,7 +17,10 @@ public class StudentDashboard extends Screen {
                             "1) View List of Available Courses\n" +
                             "2) Register for a Course\n" +
                             "3) View Your Registered Courses\n" +
-                            "4) Cancel Your Registration");
+                            "4) Cancel Your Registration\n" +
+                            "5) View User Info\n" +
+                            "6) Exit Application");
+        System.out.print("> ");
         String userChoice = consoleReader.readLine();
 
         switch (Integer.parseInt(userChoice)) {
@@ -38,9 +42,19 @@ public class StudentDashboard extends Screen {
                 consoleReader.readLine();
                 break;
             case 4:
-                System.out.println("Enter Course ID: ");
+                System.out.println("Enter Course ID:");
                 String courseDelId = consoleReader.readLine();
                 System.out.println("Unregister this student from this course");
+                break;
+            case 5:
+                System.out.println("User Info:");
+                LoginScreen.student.getFirstName();
+                LoginScreen.student.getLastName();
+                LoginScreen.student.getEmail();
+                break;
+            case 6:
+                System.out.println("Exiting Application...");
+                AppState.shutdown();
                 break;
             default:
                 System.out.println("Please enter a valid input");

@@ -1,5 +1,7 @@
 package com.revature.registration.screens;
 
+import com.revature.registration.App;
+import com.revature.registration.util.AppState;
 import com.revature.registration.util.ScreenRouter;
 
 import java.io.BufferedReader;
@@ -17,7 +19,7 @@ public class WelcomeScreen extends Screen {
                 "1) Login\n" +
                 "2) Register New User\n" +
                 "3) Exit Application");
-        System.out.println("> ");
+        System.out.print("> ");
 
         String userSelection = consoleReader.readLine();
 
@@ -25,18 +27,16 @@ public class WelcomeScreen extends Screen {
 
 
             case "1":
-                System.out.println("Login goes here");
                 router.navigate("/login");
                 break;
 
             case "2":
-                System.out.println("Student Registration goes here");
                 router.navigate("/registration");
                 break;
             case "3":
-                System.out.println("Exiting Application");
+                System.out.println("Exiting Application...");
+                AppState.shutdown();
                 break;
-                // TODO close application appropriately here
             default:
                 System.out.println("Please enter a valid input");
         }
