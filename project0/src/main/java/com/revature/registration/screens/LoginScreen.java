@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 
 public class LoginScreen extends Screen {
 
+    // TODO consider replacing this with a UserSession singleton class
     public static Student student;
     public static Faculty faculty;
 
