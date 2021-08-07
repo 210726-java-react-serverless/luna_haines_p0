@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 
 public class AppState {
 
-    private boolean appRunning;
+    private static boolean appRunning;
     private ScreenRouter router;
 
     public AppState() {
@@ -34,6 +34,10 @@ public class AppState {
             }
 
         }
+    }
+
+    public static void shutdown() {
+        appRunning = false;
     }
 
 }
