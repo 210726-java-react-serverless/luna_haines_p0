@@ -19,7 +19,8 @@ public class UserServices {
     // TODO connect to database with repository classes
     public Student registerStudent(Student student) {
         if (!isStudentValid(student)) {
-            throw new InvalidInformationException("The information you provided is not valid.");
+            throw new InvalidInformationException("The information (i.e. first name, last name, email, or password)" +
+                    " you provided is not valid.");
         }
         if (studentRepo.findByEmail(student.getEmail()) != null) {
             throw new InvalidInformationException("That email is already registered with this application.");
