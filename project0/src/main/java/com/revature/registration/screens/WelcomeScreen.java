@@ -27,19 +27,16 @@ public class WelcomeScreen extends Screen {
 
 
             case "1":
-                System.out.println("Login goes here");
                 router.navigate("/login");
                 break;
 
             case "2":
-                System.out.println("Student Registration goes here");
                 router.navigate("/registration");
                 break;
             case "3":
                 System.out.println("Exiting Application...");
                 AppState.shutdown();
                 break;
-                // TODO close application appropriately here
             default:
                 System.out.println("Please enter a valid input");
         }
