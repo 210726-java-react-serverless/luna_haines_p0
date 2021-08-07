@@ -5,6 +5,7 @@ import com.revature.registration.models.Student;
 import com.revature.registration.repositories.FacultyRepository;
 import com.revature.registration.repositories.StudentRepository;
 import com.revature.registration.util.exceptions.AuthenticationException;
+import com.revature.registration.util.exceptions.InvalidInformationException;
 
 public class UserServices {
     private StudentRepository studentRepo;
@@ -17,24 +18,33 @@ public class UserServices {
 
     // TODO connect to database with repository classes
     public Student registerStudent(Student student) {
-        return null;
+        if (!isStudentValid(student)) {
+            throw new InvalidInformationException("The information you provided is not valid.");
+        }
+        if (studentRepo.findByEmail(student.getEmail()) != null) {
+            throw new InvalidInformationException("That email is already registered with this application.");
+        }
+
+        // TODO persist user to db
+        return student;
     }
 
     public Student loginStudent(String email, String password) throws AuthenticationException {
-        // // TODO if email/password combo not in database, then throw AuthenticationException
-        return null;
+        // TODO if email/password combo not in database, then throw AuthenticationException
+        Student student = studentRepo.findByEmail(email);
+        return student;
     }
 
     public Faculty loginFaculty(String email, String password) throws AuthenticationException {
         // TODO if email/password combo not in database, then throw AuthenticationException
-        return null;
+        Faculty faculty = facultyRepo.findByEmail(email);
+        return faculty;
     }
 
     public boolean isStudentValid(Student student) {
         if (!student.getEmail().contains("@")) {
             return false;
         }
-        // TODO check if email is already in db
         return true;
     }
 }
