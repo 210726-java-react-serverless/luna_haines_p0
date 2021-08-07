@@ -20,7 +20,7 @@ public class UserServices {
         return null;
     }
 
-    public Student loginStudent(String email, String password) {
+    public Student loginStudent(String email, String password) throws AuthenticationException {
         // // TODO if email/password combo not in database, then throw AuthenticationException
         return null;
     }
