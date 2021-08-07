@@ -1,10 +1,16 @@
 package com.revature.registration.screens;
 
+import com.revature.registration.models.Faculty;
+import com.revature.registration.models.Student;
+import com.revature.registration.services.UserServices;
 import com.revature.registration.util.ScreenRouter;
 
 import java.io.BufferedReader;
 
 public class LoginScreen extends Screen {
+
+    public static Student student;
+    public static Faculty faculty;
 
     public LoginScreen(BufferedReader consoleReader, ScreenRouter router) {
         super("Login Screen", "/login", consoleReader, router);
@@ -26,11 +32,11 @@ public class LoginScreen extends Screen {
         // TODO authenticate users via database queries
         switch (userType) {
             case 1:
-                // Authentication here
+                faculty = UserServices.loginFaculty(email,password);
                 router.navigate("/facultydashboard");
                 break;
             case 2:
-                //Authentication here
+                student = UserServices.loginStudent(email,password);
                 router.navigate("/studentdashboard");
                 break;
             default:
