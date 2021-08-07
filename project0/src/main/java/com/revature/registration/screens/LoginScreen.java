@@ -21,6 +21,7 @@ public class LoginScreen extends Screen {
         System.out.println( "Login Screen:\n" +
                             "1) Faculty\n" +
                             "2) Student");
+        System.out.print("> ");
         int userType = Integer.parseInt(consoleReader.readLine());
 
         System.out.println("Email: ");

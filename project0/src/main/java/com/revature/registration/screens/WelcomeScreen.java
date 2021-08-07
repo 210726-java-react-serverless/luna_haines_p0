@@ -19,7 +19,7 @@ public class WelcomeScreen extends Screen {
                 "1) Login\n" +
                 "2) Register New User\n" +
                 "3) Exit Application");
-        System.out.println("> ");
+        System.out.print("> ");
 
         String userSelection = consoleReader.readLine();
 

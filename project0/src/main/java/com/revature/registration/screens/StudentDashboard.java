@@ -20,6 +20,7 @@ public class StudentDashboard extends Screen {
                             "4) Cancel Your Registration\n" +
                             "5) View User Info\n" +
                             "6) Exit Application");
+        System.out.print("> ");
         String userChoice = consoleReader.readLine();
 
         switch (Integer.parseInt(userChoice)) {

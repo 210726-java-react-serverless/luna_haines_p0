@@ -19,6 +19,7 @@ public class FacultyDashboard extends Screen {
                             "3) Remove a Course\n" +
                             "4) View User Info\n" +
                             "5) Exit Application");
+        System.out.print("> ");
         String userChoice = consoleReader.readLine();
 
         // TODO add methods from UserService to perform CRUD operations
