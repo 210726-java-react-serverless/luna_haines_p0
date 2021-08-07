@@ -20,10 +20,6 @@ public class UserServices {
         return null;
     }
 
-    public Faculty registerFaculty(Faculty faculty) {
-        return null;
-    }
-
     public static Student loginStudent(String email, String password) {
         // // TODO if email/password combo not in database, then throw AuthenticationException
         return null;
