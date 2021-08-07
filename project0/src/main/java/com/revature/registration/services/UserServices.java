@@ -20,18 +20,18 @@ public class UserServices {
         return null;
     }
 
-    public static Student loginStudent(String email, String password) {
+    public Student loginStudent(String email, String password) {
         // // TODO if email/password combo not in database, then throw AuthenticationException
         return null;
     }
 
-    public static Faculty loginFaculty(String email, String password) throws AuthenticationException {
+    public Faculty loginFaculty(String email, String password) throws AuthenticationException {
         // TODO if email/password combo not in database, then throw AuthenticationException
         return null;
     }
 
-    public static boolean isStudentValid(String firstName, String lastName, String email, String password) {
-        if (!email.contains("@")) {
+    public boolean isStudentValid(Student student) {
+        if (!student.getEmail().contains("@")) {
             return false;
         }
         // TODO check if email is already in db

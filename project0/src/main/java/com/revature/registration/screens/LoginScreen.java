@@ -12,9 +12,11 @@ public class LoginScreen extends Screen {
     // TODO consider replacing this with a UserSession singleton class
     public static Student student;
     public static Faculty faculty;
+    private final UserServices userServices;
 
-    public LoginScreen(BufferedReader consoleReader, ScreenRouter router) {
+    public LoginScreen(BufferedReader consoleReader, ScreenRouter router, UserServices userServices) {
         super("Login Screen", "/login", consoleReader, router);
+        this.userServices = userServices;
     }
 
     @Override
@@ -34,11 +36,11 @@ public class LoginScreen extends Screen {
         // TODO authenticate users via database queries
         switch (userType) {
             case 1:
-                faculty = UserServices.loginFaculty(email,password);
+                faculty = userServices.loginFaculty(email,password);
                 router.navigate("/facultydashboard");
                 break;
             case 2:
-                student = UserServices.loginStudent(email,password);
+                student = userServices.loginStudent(email,password);
                 router.navigate("/studentdashboard");
                 break;
             default:

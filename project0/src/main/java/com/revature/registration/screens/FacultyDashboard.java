@@ -1,5 +1,6 @@
 package com.revature.registration.screens;
 
+import com.revature.registration.services.UserServices;
 import com.revature.registration.util.AppState;
 import com.revature.registration.util.ScreenRouter;
 
@@ -7,8 +8,10 @@ import java.io.BufferedReader;
 
 public class FacultyDashboard extends Screen {
 
-    public FacultyDashboard(BufferedReader consoleReader, ScreenRouter router) {
+    private final UserServices userServices;
+    public FacultyDashboard(BufferedReader consoleReader, ScreenRouter router, UserServices userServices) {
         super("Faculty Dashboard", "/facultydashboard", consoleReader, router);
+        this.userServices = userServices;
     }
 
     @Override

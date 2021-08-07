@@ -9,9 +9,11 @@ import java.io.BufferedReader;
 import java.sql.SQLOutput;
 
 public class RegistrationScreen extends Screen {
+    private final UserServices userServices;
 
-    public RegistrationScreen(BufferedReader consoleReader, ScreenRouter router) {
+    public RegistrationScreen(BufferedReader consoleReader, ScreenRouter router, UserServices userServices) {
         super("Registration Screen", "/registration", consoleReader, router);
+        this.userServices = userServices;
     }
 
     @Override
@@ -32,15 +34,9 @@ public class RegistrationScreen extends Screen {
 
         int id = 0; // TODO implement random id values (hashcode?)
 
-        if (!UserServices.isStudentValid(firstName,lastName,email,password)) {
-            System.out.println("That information is invalid. Please ensure you entered a valid email address that" +
-                    " isn't already registered.");
-            return;
-        }
-
         // TODO create student here, persist their info to the database
 
-        Student newStudent = new Student(firstName,lastName,email,password);
+
 
         router.navigate("/welcome");
     }
