@@ -4,7 +4,7 @@ import com.revature.registration.models.Faculty;
 
 public class FacultyRepository implements CrudRepository<Faculty>{
 
-
+    // TODO implement CRUD methods with db
     @Override
     public Faculty save(Faculty newResource) {
         return null;
@@ -12,6 +12,10 @@ public class FacultyRepository implements CrudRepository<Faculty>{
 
     @Override
     public Faculty findById(int id) {
+        return null;
+    }
+
+    public Faculty findByEmail(String email) {
         return null;
     }
 
