@@ -4,6 +4,7 @@ import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
 import com.revature.registration.services.UserServices;
 import com.revature.registration.util.ScreenRouter;
+import com.revature.registration.util.exceptions.AuthenticationException;
 
 import java.io.BufferedReader;
 
@@ -21,9 +22,9 @@ public class LoginScreen extends Screen {
 
     @Override
     public void render() throws Exception {
-        System.out.println( "Login Screen:\n" +
-                            "1) Faculty\n" +
-                            "2) Student");
+        System.out.println("Login Screen:\n" +
+                "1) Faculty\n" +
+                "2) Student");
         System.out.print("> ");
         int userType = Integer.parseInt(consoleReader.readLine());
 
@@ -32,20 +33,23 @@ public class LoginScreen extends Screen {
 
         System.out.println("Password: ");
         String password = consoleReader.readLine();
-
-        // TODO authenticate users via database queries
-        switch (userType) {
-            case 1:
-                faculty = userServices.loginFaculty(email,password);
-                router.navigate("/facultydashboard");
-                break;
-            case 2:
-                student = userServices.loginStudent(email,password);
-                router.navigate("/studentdashboard");
-                break;
-            default:
-                System.out.println("Please enter a valid input");
+        try {
+            switch (userType) {
+                case 1:
+                    faculty = userServices.loginFaculty(email, password);
+                    router.navigate("/facultydashboard");
+                    break;
+                case 2:
+                    student = userServices.loginStudent(email, password);
+                    router.navigate("/studentdashboard");
+                    break;
+                default:
+                    System.out.println("Please enter a valid input");
+            }
+        } catch (AuthenticationException ae) {
+            System.out.println("Could not find user with provided credentials.");
+            System.out.println("Sending you back to Welcome...");
+            router.navigate("/welcome");
         }
     }
-
 }
