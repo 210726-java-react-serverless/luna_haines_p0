@@ -2,7 +2,6 @@ package com.revature.registration.services;
 
 import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
-import com.revature.registration.models.User;
 import com.revature.registration.repositories.FacultyRepository;
 import com.revature.registration.repositories.StudentRepository;
 
@@ -28,8 +27,18 @@ public class UserServices {
         return null;
     }
 
+    public static boolean checkStudent(String email, String password) {
+        // TODO check if user with specified information exists
+        return true;
+    }
+
     public static Faculty loginFaculty(String email, String password) {
         return null;
+    }
+
+    public static boolean checkFaculty(String email, String password) {
+        // TODO check if user with specified information exists
+        return true;
     }
 
     public static boolean isStudentValid(String firstName, String lastName, String email, String password) {
