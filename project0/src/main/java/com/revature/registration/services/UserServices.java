@@ -4,6 +4,7 @@ import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
 import com.revature.registration.repositories.FacultyRepository;
 import com.revature.registration.repositories.StudentRepository;
+import com.revature.registration.util.exceptions.AuthenticationException;
 
 public class UserServices {
     private StudentRepository studentRepo;
@@ -24,21 +25,13 @@ public class UserServices {
     }
 
     public static Student loginStudent(String email, String password) {
+        // // TODO if email/password combo not in database, then throw AuthenticationException
         return null;
     }
 
-    public static boolean checkStudent(String email, String password) {
-        // TODO check if user with specified information exists
-        return true;
-    }
-
-    public static Faculty loginFaculty(String email, String password) {
+    public static Faculty loginFaculty(String email, String password) throws AuthenticationException {
+        // TODO if email/password combo not in database, then throw AuthenticationException
         return null;
-    }
-
-    public static boolean checkFaculty(String email, String password) {
-        // TODO check if user with specified information exists
-        return true;
     }
 
     public static boolean isStudentValid(String firstName, String lastName, String email, String password) {
