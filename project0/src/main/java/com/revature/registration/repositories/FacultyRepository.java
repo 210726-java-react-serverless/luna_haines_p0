@@ -6,11 +6,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import com.revature.registration.models.Faculty;
 import com.revature.registration.util.ConnectionFactory;
 import com.revature.registration.util.exceptions.DataSourceException;
 import com.revature.registration.util.exceptions.InvalidInformationException;
 import org.bson.Document;
+import org.bson.conversions.Bson;
 
 import javax.print.Doc;
 
@@ -88,8 +91,21 @@ public class FacultyRepository implements CrudRepository<Faculty>{
     }
 
     @Override
-    public boolean update(Faculty updatedResource) {
-        return false;
+    public boolean update(Faculty updateFaculty,String field,String newValue) {
+
+        MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
+        MongoDatabase facultyDb = mongoClient.getDatabase("p0");
+        MongoCollection<Document> facultyCollection = facultyDb.getCollection("faculty");
+        Document queryDoc = new Document(field,newValue);
+
+        // TODO create if statements with other potential problems
+        if (field.equals("email") && facultyCollection.find(queryDoc) != null) {
+            return false;
+        }
+
+        facultyCollection.updateOne(Filters.eq("email",updateFaculty.getEmail()), Updates.set(field,newValue));
+
+        return true;
     }
 
     @Override

@@ -20,7 +20,7 @@ public class StudentRepository implements CrudRepository<Student>{
     }
 
     @Override
-    public boolean update(Student updatedResource) {
+    public boolean update(Student updatedStudent,String field,String newValue) {
         return false;
     }
 
