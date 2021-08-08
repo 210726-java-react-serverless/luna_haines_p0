@@ -24,7 +24,27 @@ public class FacultyRepository implements CrudRepository<Faculty>{
 
     @Override
     public Faculty findById(int id) {
-        return null;
+
+        try {
+            // TODO obfuscate dbName and collectionName with properties
+            MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
+            MongoDatabase facultyDb = mongoClient.getDatabase("p0");
+            MongoCollection<Document> facultyCollection = facultyDb.getCollection("faculty");
+            Document queryDoc = new Document("_id", Integer.toString(id));
+            Document returnDoc = facultyCollection.find(queryDoc).first();
+
+            ObjectMapper mapper = new ObjectMapper();
+            Faculty faculty = mapper.readValue(returnDoc.toJson(), Faculty.class);
+            faculty.setId(returnDoc.get("_id").toString());
+
+            return faculty;
+        } catch (JsonMappingException jme) {
+            jme.printStackTrace();
+            throw new DataSourceException("An exception occurred while mapping the Document",jme);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataSourceException("An unexpected exception occurred",e);
+        }
     }
 
     public Faculty findByCredentials(String email, String password) {
