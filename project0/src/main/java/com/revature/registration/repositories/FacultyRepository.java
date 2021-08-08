@@ -18,8 +18,20 @@ public class FacultyRepository implements CrudRepository<Faculty>{
 
     // TODO implement CRUD methods with db
     @Override
-    public Faculty save(Faculty newResource) {
-        return null;
+    public Faculty save(Faculty newFaculty) {
+
+        MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
+        MongoDatabase facultyDb = mongoClient.getDatabase("p0");
+        MongoCollection<Document> facultyCollection = facultyDb.getCollection("faculty");
+        Document newFacultyDoc = new Document("firstName", newFaculty.getFirstName())
+                .append("lastName",newFaculty.getLastName())
+                .append("email",newFaculty.getEmail())
+                .append("password",newFaculty.getPassword());
+
+        facultyCollection.insertOne(newFacultyDoc);
+        newFaculty.setId(newFacultyDoc.get("_id").toString());
+
+        return newFaculty;
     }
 
     @Override
