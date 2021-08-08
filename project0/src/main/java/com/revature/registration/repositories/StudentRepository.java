@@ -25,7 +25,7 @@ public class StudentRepository implements CrudRepository<Student>{
     }
 
     @Override
-    public boolean deleteById(int id) {
+    public boolean deleteById(String id) {
         return false;
     }
 }

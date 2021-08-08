@@ -109,7 +109,16 @@ public class FacultyRepository implements CrudRepository<Faculty>{
     }
 
     @Override
-    public boolean deleteById(int id) {
-        return false;
+    public boolean deleteById(String id) {
+        MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
+        MongoDatabase facultyDb = mongoClient.getDatabase("p0");
+        MongoCollection<Document> facultyCollection =  facultyDb.getCollection("faculty");
+
+        if (facultyCollection.find(Filters.eq("_id",id)) == null) {
+            return false;
+        }
+
+        facultyCollection.deleteOne(Filters.eq("_id",id));
+        return true;
     }
 }
