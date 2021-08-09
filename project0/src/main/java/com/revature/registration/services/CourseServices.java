@@ -16,6 +16,10 @@ public class CourseServices {
         this.courseRepo = courseRepo;
     }
 
+    public Course createCourse(Course newCourse) {
+        return courseRepo.save(newCourse);
+    }
+
     public List<Course> getCourseList() {
         return courseRepo.findAll();
     }
@@ -34,6 +38,14 @@ public class CourseServices {
 
     public  void removeFromCourse(Student student,String number) {
         // TODO write this method, probably need a new update method in CourseRepository
+    }
+
+    public boolean updateCourse(String currentNumber,String field, String newValue) {
+        return courseRepo.update(currentNumber,field,newValue);
+    }
+
+    public boolean removeCourse(String number) {
+        return courseRepo.deleteByNumber(number);
     }
 
     private boolean isCourseOpen() {

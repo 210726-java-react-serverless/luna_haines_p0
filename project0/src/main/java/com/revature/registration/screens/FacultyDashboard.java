@@ -58,13 +58,34 @@ public class FacultyDashboard extends Screen {
                 int capacity = Integer.parseInt(consoleReader.readLine());
 
                 Course newCourse = new Course(number,name,description,professorEmail,capacity);
+                courseServices.createCourse(newCourse);
 
                 break;
             case 2:
                 System.out.println("Update a Course");
+
+                System.out.println("Enter current course number");
+                System.out.print("> ");
+                String currentNumber = consoleReader.readLine();
+
+                System.out.println("Enter field to update:\n" +
+                        "(number, name, or description)");
+                System.out.print("> ");
+                String field = consoleReader.readLine();
+
+                System.out.println("Enter new value for that field:");
+                System.out.print("> ");
+                String newValue = consoleReader.readLine();
+
+                if (!courseServices.updateCourse(currentNumber,field,newValue)) {
+                    System.out.println("could not update course");
+                    break;
+                }
+                courseServices.updateCourse(currentNumber,field,newValue);
                 break;
             case 3:
                 System.out.println("Remove a Course");
+                System.out.println("Enter Course Number");
                 break;
             case 4:
                 System.out.println("User Info:");

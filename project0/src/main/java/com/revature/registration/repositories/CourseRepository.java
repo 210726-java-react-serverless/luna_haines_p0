@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
 import com.revature.registration.models.Course;
 import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
@@ -15,9 +17,8 @@ import org.bson.Document;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CourseRepository implements CrudRepository<Course>{
+public class CourseRepository{
 
-    @Override
     public Course save(Course newCourse) {
         MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
         MongoDatabase courseDb = mongoClient.getDatabase("p0");
@@ -34,7 +35,6 @@ public class CourseRepository implements CrudRepository<Course>{
         return newCourse;
     }
 
-    @Override
     public Course findById(String id) {
         try {
             MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
@@ -86,8 +86,7 @@ public class CourseRepository implements CrudRepository<Course>{
             MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
             MongoDatabase courseDb = mongoClient.getDatabase("p0");
             MongoCollection<Document> courseCollection = courseDb.getCollection("course");
-            Document query = new Document("email", student.getEmail());
-            List<Document> result = courseCollection.find(query).into(new ArrayList<>());
+            List<Document> result = courseCollection.find(Filters.in("students",student.getEmail())).into(new ArrayList<>());
 
             ObjectMapper mapper = new ObjectMapper();
             List<Course> registeredCourses = new ArrayList<>();
@@ -155,18 +154,37 @@ public class CourseRepository implements CrudRepository<Course>{
         }
     }
 
+    public boolean update(String currentNumber, String field, String newValue) {
+        MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
+        MongoDatabase courseDb = mongoClient.getDatabase("p0");
+        MongoCollection<Document> courseCollection = courseDb.getCollection("course");
+        Document updateCourseDoc = new Document(field,newValue);
 
-    @Override
-    public boolean update(Course updatedCourse, String field, String newValue) {
-        return false;
+        if (field.equals("number") && courseCollection.find(Filters.eq("number",newValue)) != null) {
+            return false;
+        }
+
+        if (courseCollection.find(Filters.eq("number",currentNumber)) == null) {
+            return false;
+        }
+
+        courseCollection.updateOne(Filters.eq("number",currentNumber),
+                Updates.set(field,newValue));
+        return true;
     }
 
     // TODO add addStudent method
     // TODO add removeStudent method
 
-    @Override
-    public boolean deleteById(String id) {
-        // TODO delete from student and faculty collections
-        return false;
+    public boolean deleteByNumber(String number) {
+        MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
+        MongoDatabase courseDb = mongoClient.getDatabase("p0");
+        MongoCollection<Document> courseCollection = courseDb.getCollection("course");
+
+        if (courseCollection.find(Filters.eq("number",number)) == null) {
+            return false;
+        }
+        courseCollection.deleteOne(Filters.eq("number",number));
+        return true;
     }
 }

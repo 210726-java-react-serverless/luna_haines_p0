@@ -107,9 +107,9 @@ public class FacultyRepository implements CrudRepository<Faculty>{
         return true;
     }
 
+    // method is never used
     @Override
     public boolean deleteById(String id) {
-        // TODO delete courses taught
 
         MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
         MongoDatabase facultyDb = mongoClient.getDatabase("p0");
