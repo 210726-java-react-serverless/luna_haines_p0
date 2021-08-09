@@ -7,6 +7,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.revature.registration.models.Course;
+import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
 import com.revature.registration.util.ConnectionFactory;
 import com.revature.registration.util.exceptions.DataSourceException;
@@ -96,6 +97,30 @@ public class CourseRepository implements CrudRepository<Course>{
                 registeredCourses.add(mapper.readValue(d.toJson(), Course.class));
             }
             return registeredCourses;
+        } catch (JsonMappingException jme) {
+            jme.printStackTrace();
+            throw new DataSourceException("An exception occurred while mapping the Document",jme);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataSourceException("An unexpected exception occurred",e);
+        }
+    }
+
+    public List<Course> findByFaculty(Faculty faculty) {
+        try {
+            MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
+            MongoDatabase courseDb = mongoClient.getDatabase("p0");
+            MongoCollection<Document> courseCollection = courseDb.getCollection("course");
+            Document query = new Document("email", faculty.getEmail());
+            List<Document> result = courseCollection.find(query).into(new ArrayList<>());
+
+            ObjectMapper mapper = new ObjectMapper();
+            List<Course> taughtCourses = null;
+
+            for (Document d : result) {
+                taughtCourses.add(mapper.readValue(d.toJson(), Course.class));
+            }
+            return taughtCourses;
         } catch (JsonMappingException jme) {
             jme.printStackTrace();
             throw new DataSourceException("An exception occurred while mapping the Document",jme);
