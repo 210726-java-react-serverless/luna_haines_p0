@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
 import com.revature.registration.models.Course;
 import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
@@ -26,8 +25,8 @@ public class CourseRepository implements CrudRepository<Course>{
         Document newCourseDoc = new Document("number",newCourse.getNumber())
                 .append("name",newCourse.getName())
                 .append("description",newCourse.getDescription())
-                .append("professor",newCourse.getProfessorEmail())
-                .append("students",newCourse.getStudentEmails());
+                .append("professor",newCourse.getProfessor())
+                .append("students",newCourse.getStudents());
 
         courseCollection.insertOne(newCourseDoc);
         newCourse.setId(newCourseDoc.get("_id").toString());
@@ -111,14 +110,17 @@ public class CourseRepository implements CrudRepository<Course>{
             MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
             MongoDatabase courseDb = mongoClient.getDatabase("p0");
             MongoCollection<Document> courseCollection = courseDb.getCollection("course");
-            Document query = new Document("email", faculty.getEmail());
+            Document query = new Document("professor", faculty.getEmail());
             List<Document> result = courseCollection.find(query).into(new ArrayList<>());
 
+            // TODO result has no items in it. why???
             ObjectMapper mapper = new ObjectMapper();
             List<Course> taughtCourses = new ArrayList<>();
 
             for (Document d : result) {
-                taughtCourses.add(mapper.readValue(d.toJson(), Course.class));
+                Course c = mapper.readValue(d.toJson(),Course.class);
+                c.setId(d.get("_id").toString());
+                taughtCourses.add(c);
             }
             return taughtCourses;
         } catch (JsonMappingException jme) {

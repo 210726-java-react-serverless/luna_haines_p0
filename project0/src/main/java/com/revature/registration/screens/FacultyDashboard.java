@@ -72,11 +72,16 @@ public class FacultyDashboard extends Screen {
                 System.out.println(faculty.getLastName());
                 System.out.println(faculty.getEmail());
                 System.out.println("Courses Taught:");
-                System.out.println(courseServices.getTaughtCourses(faculty));
+                for (Course c : courseServices.getTaughtCourses(faculty)) {
+                    System.out.println("displaying course:");
+                    System.out.println(c.toString());
+                }
+
                 break;
             case 5:
                 System.out.println("Exiting Application");
                 AppState.shutdown();
+                break;
             default:
                 System.out.println("Please enter a valid input");
         }

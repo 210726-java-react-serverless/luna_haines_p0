@@ -1,21 +1,45 @@
 package com.revature.registration.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
+import java.util.Arrays;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Course {
+
+    @JsonSerialize(using = ToStringSerializer.class)
     public String id;
     public String number;
     public String name;
     public String description;
-    public String professorEmail;
+    public String professor;
     public int capacity;
-    public String[] studentEmails;
+    public String[] students;
 
-    public Course(String number, String name, String description, String professorEmail, int capacity, String... studentEmails) {
+    public Course() {}
+
+    public Course(String number, String name, String description, String professor, int capacity, String... students) {
         this.number = number;
         this.name = name;
         this.description = description;
-        this.professorEmail = professorEmail;
+        this.professor = professor;
         this.capacity = capacity;
-        this.studentEmails = studentEmails;
+        this.students = students;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id='" + id + '\'' +
+                "\n  number='" + number + '\'' +
+                "\n  name='" + name + '\'' +
+                "\n  description='" + description + '\'' +
+                "\n  professorEmail='" + professor + '\'' +
+                "\n  capacity=" + capacity +
+                "\n  studentEmails=" + Arrays.toString(students) +
+                '}';
     }
 
     public String getId() {
@@ -50,19 +74,19 @@ public class Course {
         this.description = description;
     }
 
-    public String getProfessorEmail() {
-        return professorEmail;
+    public String getProfessor() {
+        return professor;
     }
 
-    public void setProfessorEmail(String professorEmail) {
-        this.professorEmail = professorEmail;
+    public void setProfessor(String professor) {
+        this.professor = professor;
     }
 
-    public String[] getStudentEmails() {
-        return studentEmails;
+    public String[] getStudents() {
+        return students;
     }
 
-    public void setStudentEmails(String[] studentEmails) {
-        this.studentEmails = studentEmails;
+    public void setStudents(String[] students) {
+        this.students = students;
     }
 }
