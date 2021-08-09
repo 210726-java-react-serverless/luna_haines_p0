@@ -10,6 +10,8 @@ public class Faculty extends User {
     private String password;
     private String id;
 
+    public Faculty() {}
+
     public Faculty(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
