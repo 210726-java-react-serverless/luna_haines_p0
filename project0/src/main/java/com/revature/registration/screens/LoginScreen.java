@@ -4,6 +4,7 @@ import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
 import com.revature.registration.services.UserServices;
 import com.revature.registration.util.ScreenRouter;
+import com.revature.registration.util.Session;
 import com.revature.registration.util.exceptions.AuthenticationException;
 
 import java.io.BufferedReader;
@@ -34,10 +35,12 @@ public class LoginScreen extends Screen {
             switch (userType) {
                 case 1:
                     Faculty faculty = userServices.loginFaculty(email, password);
+                    Session.getInstance().setFaculty(faculty);
                     router.navigate("/facultydashboard");
                     break;
                 case 2:
                     Student student = userServices.loginStudent(email, password);
+                    Session.getInstance().setStudent(student);
                     router.navigate("/studentdashboard");
                     break;
                 default:
