@@ -33,7 +33,6 @@ public class RegistrationScreen extends Screen {
         System.out.println("Password: ");
         String password = consoleReader.readLine();
 
-        // TODO create student here, persist their info to the database
         Student newStudent = new Student(firstName,lastName,email,password);
         try {
             userServices.registerStudent(newStudent);

@@ -16,7 +16,7 @@ public class UserServices {
         this.facultyRepo = facultyRepo;
     }
 
-    // TODO connect to database with repository classes
+
     public Student registerStudent(Student student) {
         if (!isStudentValid(student)) {
             throw new InvalidInformationException("The information (i.e. first name, last name, email, or password)" +
@@ -26,7 +26,7 @@ public class UserServices {
             throw new InvalidInformationException("That email is already registered with this application.");
         }
 
-        // TODO persist user to db
+        studentRepo.save(student);
         return student;
     }
 

@@ -1,5 +1,6 @@
 package com.revature.registration.screens;
 
+import com.revature.registration.models.Course;
 import com.revature.registration.models.Student;
 import com.revature.registration.services.CourseServices;
 import com.revature.registration.services.UserServices;
@@ -35,10 +36,13 @@ public class StudentDashboard extends Screen {
         System.out.print("> ");
         String userChoice = consoleReader.readLine();
 
+        // TODO write and implement CRUD operation from courseServices
         switch (Integer.parseInt(userChoice)) {
             case 1:
                 System.out.println("Course List:");
-                System.out.println(courseServices.getCourseList().toString());
+                for (Course c : courseServices.getCourseList()) {
+                    System.out.println(c.toString());
+                }
                 break;
             case 2:
                 System.out.println("Enter Course Number: ");

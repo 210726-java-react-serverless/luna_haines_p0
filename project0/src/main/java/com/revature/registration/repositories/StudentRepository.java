@@ -100,6 +100,7 @@ public class StudentRepository implements CrudRepository<Student>{
         return true;
     }
 
+    // method is never used
     @Override
     public boolean deleteById(String id) {
         // TODO remove student from courses

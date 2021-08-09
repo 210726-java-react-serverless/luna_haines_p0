@@ -26,7 +26,6 @@ public abstract class Screen {
         return route;
     }
 
-    // TODO implement render() for remaining screens
     public abstract void render() throws Exception;
 
 }

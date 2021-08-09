@@ -57,8 +57,6 @@ public class CourseRepository{
         }
     }
 
-    // TODO add findByProf method
-
     public Course findByNumber(String number) {
         try {
             MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
