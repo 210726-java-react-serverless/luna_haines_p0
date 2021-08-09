@@ -68,9 +68,9 @@ public class FacultyDashboard extends Screen {
                 break;
             case 4:
                 System.out.println("User Info:");
-                faculty.getFirstName();
-                faculty.getLastName();
-                faculty.getEmail();
+                System.out.println(faculty.getFirstName());
+                System.out.println(faculty.getLastName());
+                System.out.println(faculty.getEmail());
                 System.out.println("Courses Taught:");
                 System.out.println(courseServices.getTaughtCourses(faculty));
                 break;
