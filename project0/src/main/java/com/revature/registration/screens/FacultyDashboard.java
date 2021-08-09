@@ -1,5 +1,6 @@
 package com.revature.registration.screens;
 
+import com.revature.registration.models.Faculty;
 import com.revature.registration.services.UserServices;
 import com.revature.registration.util.AppState;
 import com.revature.registration.util.ScreenRouter;
@@ -9,9 +10,12 @@ import java.io.BufferedReader;
 public class FacultyDashboard extends Screen {
 
     private final UserServices userServices;
-    public FacultyDashboard(BufferedReader consoleReader, ScreenRouter router, UserServices userServices) {
+    public Faculty faculty;
+
+    public FacultyDashboard(BufferedReader consoleReader, ScreenRouter router, UserServices userServices, Faculty faculty) {
         super("Faculty Dashboard", "/facultydashboard", consoleReader, router);
         this.userServices = userServices;
+        this.faculty = faculty;
     }
 
     @Override
@@ -38,9 +42,9 @@ public class FacultyDashboard extends Screen {
                 break;
             case 4:
                 System.out.println("User Info:");
-                LoginScreen.faculty.getFirstName();
-                LoginScreen.faculty.getLastName();
-                LoginScreen.faculty.getEmail();
+                faculty.getFirstName();
+                faculty.getLastName();
+                faculty.getEmail();
                 System.out.println("Classes:");
                 // TODO display classes taught here
                 break;

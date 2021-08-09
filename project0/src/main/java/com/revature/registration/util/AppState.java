@@ -20,13 +20,14 @@ public class AppState {
         StudentRepository studentRepository = new StudentRepository();
         FacultyRepository facultyRepository = new FacultyRepository();
         UserServices userServices = new UserServices(studentRepository,facultyRepository);
+        Session user = Session.getInstance();
 
         router = new ScreenRouter();
         router.addScreen(new WelcomeScreen(consoleReader,router));
         router.addScreen(new LoginScreen(consoleReader,router,userServices));
         router.addScreen(new RegistrationScreen(consoleReader,router,userServices));
-        router.addScreen(new StudentDashboard(consoleReader,router,userServices));
-        router.addScreen(new FacultyDashboard(consoleReader,router,userServices));
+        router.addScreen(new StudentDashboard(consoleReader,router,userServices,user.getStudent()));
+        router.addScreen(new FacultyDashboard(consoleReader,router,userServices,user.getFaculty()));
 
     }
 
@@ -45,6 +46,7 @@ public class AppState {
     }
 
     public static void shutdown() {
+        ConnectionFactory.getInstance().cleanUp();
         appRunning = false;
     }
 

@@ -22,7 +22,7 @@ public class UserServices {
             throw new InvalidInformationException("The information (i.e. first name, last name, email, or password)" +
                     " you provided is not valid.");
         }
-        if (studentRepo.findByEmail(student.getEmail()) != null) {
+        if (studentRepo.findById(student.getId()) != null) {
             throw new InvalidInformationException("That email is already registered with this application.");
         }
 
@@ -31,14 +31,18 @@ public class UserServices {
     }
 
     public Student loginStudent(String email, String password) throws AuthenticationException {
-        // TODO if email/password combo not in database, then throw AuthenticationException
-        Student student = studentRepo.findByEmail(email);
+        Student student = studentRepo.findByCredentials(email,password);
+        if (student == null) {
+            throw new AuthenticationException("Invalid Username/Password combo");
+        }
         return student;
     }
 
     public Faculty loginFaculty(String email, String password) throws AuthenticationException {
-        // TODO if email/password combo not in database, then throw AuthenticationException
-        Faculty faculty = facultyRepo.findByEmail(email);
+        Faculty faculty = facultyRepo.findByCredentials(email,password);
+        if (faculty == null) {
+            throw new AuthenticationException("Invalid Username/Password combo");
+        }
         return faculty;
     }
 
