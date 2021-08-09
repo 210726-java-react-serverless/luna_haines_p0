@@ -53,10 +53,15 @@ public class CourseRepository implements CrudRepository<Course>{
         }
     }
 
+    // TODO add findByNumber and findByProf methods (return a list of courses)
+
     @Override
     public boolean update(Course updatedCourse, String field, String newValue) {
         return false;
     }
+
+    // TODO add addStudent method
+    // TODO add removeStudent method
 
     @Override
     public boolean deleteById(String id) {
