@@ -19,7 +19,6 @@ import javax.print.Doc;
 
 public class FacultyRepository implements CrudRepository<Faculty>{
 
-    // TODO implement CRUD methods with db
     @Override
     public Faculty save(Faculty newFaculty) {
 
@@ -38,14 +37,14 @@ public class FacultyRepository implements CrudRepository<Faculty>{
     }
 
     @Override
-    public Faculty findById(int id) {
+    public Faculty findById(String id) {
 
         try {
             // TODO obfuscate dbName and collectionName with properties
             MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
             MongoDatabase facultyDb = mongoClient.getDatabase("p0");
             MongoCollection<Document> facultyCollection = facultyDb.getCollection("faculty");
-            Document queryDoc = new Document("_id", Integer.toString(id));
+            Document queryDoc = new Document("_id", id);
             Document returnDoc = facultyCollection.find(queryDoc).first();
 
             ObjectMapper mapper = new ObjectMapper();
@@ -110,6 +109,7 @@ public class FacultyRepository implements CrudRepository<Faculty>{
 
     @Override
     public boolean deleteById(String id) {
+
         MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
         MongoDatabase facultyDb = mongoClient.getDatabase("p0");
         MongoCollection<Document> facultyCollection =  facultyDb.getCollection("faculty");
