@@ -102,6 +102,7 @@ public class StudentRepository implements CrudRepository<Student>{
 
     @Override
     public boolean deleteById(String id) {
+        // TODO remove student from courses
 
         MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
         MongoDatabase studentDb = mongoClient.getDatabase("p0");
