@@ -7,6 +7,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 import com.revature.registration.models.Course;
+import com.revature.registration.models.Student;
 import com.revature.registration.util.ConnectionFactory;
 import com.revature.registration.util.exceptions.DataSourceException;
 import org.bson.Document;
@@ -56,7 +57,7 @@ public class CourseRepository implements CrudRepository<Course>{
         }
     }
 
-    // TODO add findByNumber and findByProf methods (return a list of courses)
+    // TODO add findByProf method
 
     public Course findByNumber(String number) {
         try {
@@ -71,6 +72,30 @@ public class CourseRepository implements CrudRepository<Course>{
             course.setId(result.get("_id").toString());
 
             return course;
+        } catch (JsonMappingException jme) {
+            jme.printStackTrace();
+            throw new DataSourceException("An exception occurred while mapping the Document",jme);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataSourceException("An unexpected exception occurred",e);
+        }
+    }
+
+    public List<Course> findByStudent(Student student) {
+        try {
+            MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
+            MongoDatabase courseDb = mongoClient.getDatabase("p0");
+            MongoCollection<Document> courseCollection = courseDb.getCollection("course");
+            Document query = new Document("email", student.getEmail());
+            List<Document> result = courseCollection.find(query).into(new ArrayList<>());
+
+            ObjectMapper mapper = new ObjectMapper();
+            List<Course> registeredCourses = null;
+
+            for (Document d : result) {
+                registeredCourses.add(mapper.readValue(d.toJson(), Course.class));
+            }
+            return registeredCourses;
         } catch (JsonMappingException jme) {
             jme.printStackTrace();
             throw new DataSourceException("An exception occurred while mapping the Document",jme);
@@ -102,6 +127,7 @@ public class CourseRepository implements CrudRepository<Course>{
             throw new DataSourceException("An unexpected exception occurred",e);
         }
     }
+
 
     @Override
     public boolean update(Course updatedCourse, String field, String newValue) {

@@ -6,13 +6,15 @@ public class Course {
     public String name;
     public String description;
     public String professorEmail;
+    public int capacity;
     public String[] studentEmails;
 
-    Course(String number, String name, String description, String professorEmail, String... studentEmails) {
+    Course(String number, String name, String description, String professorEmail, int capacity, String... studentEmails) {
         this.number = number;
         this.name = name;
         this.description = description;
         this.professorEmail = professorEmail;
+        this.capacity = capacity;
         this.studentEmails = studentEmails;
     }
 
