@@ -35,7 +35,6 @@ public class FacultyDashboard extends Screen {
         System.out.print("> ");
         String userChoice = consoleReader.readLine();
 
-        // TODO add methods from UserService to perform CRUD operations
         switch (Integer.parseInt(userChoice)) {
             case 1:
                 System.out.println("Add a Course");
@@ -85,7 +84,11 @@ public class FacultyDashboard extends Screen {
                 break;
             case 3:
                 System.out.println("Remove a Course");
-                System.out.println("Enter Course Number");
+                System.out.println("Enter Course Number:");
+                System.out.print("> ");
+                String removeCourseNumber = consoleReader.readLine();
+
+                courseServices.removeCourse(removeCourseNumber);
                 break;
             case 4:
                 System.out.println("User Info:");
