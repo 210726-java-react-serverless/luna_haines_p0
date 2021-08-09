@@ -4,6 +4,7 @@ import com.revature.registration.models.Course;
 import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
 import com.revature.registration.repositories.CourseRepository;
+import com.revature.registration.util.Session;
 
 import java.util.List;
 
@@ -28,7 +29,11 @@ public class CourseServices {
     }
 
     public void registerForCourse(Student student,String number) {
+        // TODO write this method, probably need a new update method in CourseRepository
+    }
 
+    public  void removeFromCourse(Student student,String number) {
+        // TODO write this method, probably need a new update method in CourseRepository
     }
 
     private boolean isCourseOpen() {

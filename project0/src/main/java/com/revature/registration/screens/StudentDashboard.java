@@ -25,7 +25,7 @@ public class StudentDashboard extends Screen {
     @Override
     public void render() throws Exception {
         System.out.println( "Student Dashboard\n" +
-                            "1) View List of Available Courses\n" +
+                            "1) View Course List\n" +
                             "2) Register for a Course\n" +
                             "3) View Your Registered Courses\n" +
                             "4) Cancel Your Registration\n" +
@@ -36,11 +36,10 @@ public class StudentDashboard extends Screen {
 
         switch (Integer.parseInt(userChoice)) {
             case 1:
-                System.out.println("Open Courses:");
-                System.out.println("Query for open courses here");
+                System.out.println("Course List:");
+                System.out.println(courseServices.getCourseList());
                 break;
             case 2:
-                // maybe make a field in UserRepository? or pass it to this class?
                 System.out.println("Enter Course Number: ");
                 String courseRegNumber = consoleReader.readLine();
                 courseServices.registerForCourse(student,courseRegNumber);
@@ -52,15 +51,15 @@ public class StudentDashboard extends Screen {
                 consoleReader.readLine();
                 break;
             case 4:
-                System.out.println("Enter Course ID:");
-                String courseDelId = consoleReader.readLine();
-                System.out.println("Unregister this student from this course");
+                System.out.println("Enter Course Number:");
+                String courseDelNumber = consoleReader.readLine();
+                courseServices.removeFromCourse(student,courseDelNumber);
                 break;
             case 5:
                 System.out.println("User Info:");
-                student.getFirstName();
-                student.getLastName();
-                student.getEmail();
+                System.out.println(student.getFirstName());
+                System.out.println(student.getLastName());
+                System.out.println(student.getEmail());
                 break;
             case 6:
                 System.out.println("Exiting Application...");
