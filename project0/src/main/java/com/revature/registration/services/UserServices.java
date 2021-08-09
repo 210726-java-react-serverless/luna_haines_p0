@@ -31,8 +31,10 @@ public class UserServices {
     }
 
     public Student loginStudent(String email, String password) throws AuthenticationException {
-        // TODO if email/password combo not in database, then throw AuthenticationException
         Student student = studentRepo.findByCredentials(email,password);
+        if (student == null) {
+            throw new AuthenticationException("Invalid Username/Password combo");
+        }
         return student;
     }
 
