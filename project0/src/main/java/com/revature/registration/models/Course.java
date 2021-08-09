@@ -9,7 +9,7 @@ public class Course {
     public int capacity;
     public String[] studentEmails;
 
-    Course(String number, String name, String description, String professorEmail, int capacity, String... studentEmails) {
+    public Course(String number, String name, String description, String professorEmail, int capacity, String... studentEmails) {
         this.number = number;
         this.name = name;
         this.description = description;

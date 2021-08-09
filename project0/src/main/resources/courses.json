@@ -14,7 +14,7 @@
 		"number": "data 105",
 		"name": "Intro to Queries",
 		"description": "An introduction to sql, nosql, and methods of data persistence",
-		"professor": "wezley.singleton@revature.net,,,
+		"professor": "wezley.singleton@revature.net",
 		"capacity": 25,
 		"students": [
 			"bruce.wayne@totallynotbatman.com",

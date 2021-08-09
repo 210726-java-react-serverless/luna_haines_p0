@@ -91,7 +91,7 @@ public class CourseRepository implements CrudRepository<Course>{
             List<Document> result = courseCollection.find(query).into(new ArrayList<>());
 
             ObjectMapper mapper = new ObjectMapper();
-            List<Course> registeredCourses = null;
+            List<Course> registeredCourses = new ArrayList<>();
 
             for (Document d : result) {
                 registeredCourses.add(mapper.readValue(d.toJson(), Course.class));
@@ -115,7 +115,7 @@ public class CourseRepository implements CrudRepository<Course>{
             List<Document> result = courseCollection.find(query).into(new ArrayList<>());
 
             ObjectMapper mapper = new ObjectMapper();
-            List<Course> taughtCourses = null;
+            List<Course> taughtCourses = new ArrayList<>();
 
             for (Document d : result) {
                 taughtCourses.add(mapper.readValue(d.toJson(), Course.class));
@@ -136,7 +136,7 @@ public class CourseRepository implements CrudRepository<Course>{
             MongoDatabase courseDb = mongoClient.getDatabase("p0");
             MongoCollection<Document> courseCollection = courseDb.getCollection("course");
             List<Document> courseDocList = courseCollection.find().into(new ArrayList<>());
-            List<Course> courseList = null;
+            List<Course> courseList = new ArrayList<>();
 
             ObjectMapper mapper = new ObjectMapper();
 

@@ -1,5 +1,6 @@
 package com.revature.registration.screens;
 
+import com.revature.registration.models.Course;
 import com.revature.registration.models.Faculty;
 import com.revature.registration.services.CourseServices;
 import com.revature.registration.services.UserServices;
@@ -37,6 +38,26 @@ public class FacultyDashboard extends Screen {
         switch (Integer.parseInt(userChoice)) {
             case 1:
                 System.out.println("Add a Course");
+                System.out.println("Enter Course Number");
+                System.out.print("> ");
+                String number = consoleReader.readLine();
+
+                System.out.println("Enter Course Name");
+                System.out.print("> ");
+                String name = consoleReader.readLine();
+
+                System.out.println("Enter Course Description");
+                System.out.print("> ");
+                String description = consoleReader.readLine();
+
+                String professorEmail = faculty.getEmail();
+
+                System.out.println("Enter Course Capacity");
+                System.out.print("> ");
+                int capacity = Integer.parseInt(consoleReader.readLine());
+
+                Course newCourse = new Course(number,name,description,professorEmail,capacity);
+
                 break;
             case 2:
                 System.out.println("Update a Course");

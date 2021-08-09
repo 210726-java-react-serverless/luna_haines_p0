@@ -37,7 +37,7 @@ public class StudentDashboard extends Screen {
         switch (Integer.parseInt(userChoice)) {
             case 1:
                 System.out.println("Course List:");
-                System.out.println(courseServices.getCourseList());
+                System.out.println(courseServices.getCourseList().toString());
                 break;
             case 2:
                 System.out.println("Enter Course Number: ");
