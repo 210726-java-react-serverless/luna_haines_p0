@@ -10,9 +10,6 @@ import java.io.BufferedReader;
 
 public class LoginScreen extends Screen {
 
-    // TODO consider replacing this with a UserSession singleton class
-    public static Student student;
-    public static Faculty faculty;
     private final UserServices userServices;
 
     public LoginScreen(BufferedReader consoleReader, ScreenRouter router, UserServices userServices) {
@@ -36,11 +33,11 @@ public class LoginScreen extends Screen {
         try {
             switch (userType) {
                 case 1:
-                    faculty = userServices.loginFaculty(email, password);
+                    Faculty faculty = userServices.loginFaculty(email, password);
                     router.navigate("/facultydashboard");
                     break;
                 case 2:
-                    student = userServices.loginStudent(email, password);
+                    Student student = userServices.loginStudent(email, password);
                     router.navigate("/studentdashboard");
                     break;
                 default:
