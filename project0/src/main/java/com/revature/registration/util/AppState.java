@@ -30,8 +30,8 @@ public class AppState {
         router.addScreen(new WelcomeScreen(consoleReader,router));
         router.addScreen(new LoginScreen(consoleReader,router,userServices));
         router.addScreen(new RegistrationScreen(consoleReader,router,userServices));
-        router.addScreen(new StudentDashboard(consoleReader,router,userServices,courseServices,user.getStudent()));
-        router.addScreen(new FacultyDashboard(consoleReader,router,userServices,courseServices,user.getFaculty()));
+        router.addScreen(new StudentDashboard(consoleReader,router,userServices,courseServices));
+        router.addScreen(new FacultyDashboard(consoleReader,router,userServices,courseServices));
 
     }
 

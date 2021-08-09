@@ -5,6 +5,7 @@ import com.revature.registration.services.CourseServices;
 import com.revature.registration.services.UserServices;
 import com.revature.registration.util.AppState;
 import com.revature.registration.util.ScreenRouter;
+import com.revature.registration.util.Session;
 
 import java.io.BufferedReader;
 
@@ -15,15 +16,15 @@ public class StudentDashboard extends Screen {
     public Student student;
 
     public StudentDashboard(BufferedReader consoleReader, ScreenRouter router, UserServices userServices,
-                            CourseServices courseServices, Student student) {
+                            CourseServices courseServices) {
         super("Student Dashboard", "student", consoleReader, router);
         this.userServices = userServices;
         this.courseServices = courseServices;
-        this.student = student;
     }
 
     @Override
     public void render() throws Exception {
+        Session.getInstance().getStudent();
         System.out.println( "Student Dashboard\n" +
                             "1) View Course List\n" +
                             "2) Register for a Course\n" +
