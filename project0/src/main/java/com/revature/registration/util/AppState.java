@@ -46,6 +46,7 @@ public class AppState {
     }
 
     public static void shutdown() {
+        ConnectionFactory.getInstance().cleanUp();
         appRunning = false;
     }
 
