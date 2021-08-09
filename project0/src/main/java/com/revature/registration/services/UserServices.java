@@ -37,8 +37,10 @@ public class UserServices {
     }
 
     public Faculty loginFaculty(String email, String password) throws AuthenticationException {
-        // TODO if email/password combo not in database, then throw AuthenticationException
         Faculty faculty = facultyRepo.findByCredentials(email,password);
+        if (faculty == null) {
+            throw new AuthenticationException("Invalid Username/Password combo");
+        }
         return faculty;
     }
 
