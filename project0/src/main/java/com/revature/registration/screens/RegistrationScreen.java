@@ -4,14 +4,17 @@ import com.revature.registration.models.Student;
 import com.revature.registration.models.User;
 import com.revature.registration.services.UserServices;
 import com.revature.registration.util.ScreenRouter;
+import com.revature.registration.util.exceptions.InvalidInformationException;
 
 import java.io.BufferedReader;
 import java.sql.SQLOutput;
 
 public class RegistrationScreen extends Screen {
+    private final UserServices userServices;
 
-    public RegistrationScreen(BufferedReader consoleReader, ScreenRouter router) {
+    public RegistrationScreen(BufferedReader consoleReader, ScreenRouter router, UserServices userServices) {
         super("Registration Screen", "/registration", consoleReader, router);
+        this.userServices = userServices;
     }
 
     @Override
@@ -30,18 +33,13 @@ public class RegistrationScreen extends Screen {
         System.out.println("Password: ");
         String password = consoleReader.readLine();
 
-        int id = 0; // TODO implement random id values (hashcode?)
-
-        if (!UserServices.isStudentValid(firstName,lastName,email,password)) {
-            System.out.println("That information is invalid. Please ensure you entered a valid email address that" +
-                    " isn't already registered.");
-            return;
-        }
-
         // TODO create student here, persist their info to the database
-
         Student newStudent = new Student(firstName,lastName,email,password);
-
-        router.navigate("/welcome");
+        try {
+            userServices.registerStudent(newStudent);
+            router.navigate("/welcome");
+        } catch (InvalidInformationException iie) {
+            System.out.println(iie.getMessage());
+        }
     }
 }

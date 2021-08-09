@@ -4,6 +4,8 @@ import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
 import com.revature.registration.repositories.FacultyRepository;
 import com.revature.registration.repositories.StudentRepository;
+import com.revature.registration.util.exceptions.AuthenticationException;
+import com.revature.registration.util.exceptions.InvalidInformationException;
 
 public class UserServices {
     private StudentRepository studentRepo;
@@ -16,36 +18,38 @@ public class UserServices {
 
     // TODO connect to database with repository classes
     public Student registerStudent(Student student) {
-        return null;
+        if (!isStudentValid(student)) {
+            throw new InvalidInformationException("The information (i.e. first name, last name, email, or password)" +
+                    " you provided is not valid.");
+        }
+        if (studentRepo.findById(student.getId()) != null) {
+            throw new InvalidInformationException("That email is already registered with this application.");
+        }
+
+        // TODO persist user to db
+        return student;
     }
 
-    public Faculty registerFaculty(Faculty faculty) {
-        return null;
+    public Student loginStudent(String email, String password) throws AuthenticationException {
+        Student student = studentRepo.findByCredentials(email,password);
+        if (student == null) {
+            throw new AuthenticationException("Invalid Username/Password combo");
+        }
+        return student;
     }
 
-    public static Student loginStudent(String email, String password) {
-        return null;
+    public Faculty loginFaculty(String email, String password) throws AuthenticationException {
+        Faculty faculty = facultyRepo.findByCredentials(email,password);
+        if (faculty == null) {
+            throw new AuthenticationException("Invalid Username/Password combo");
+        }
+        return faculty;
     }
 
-    public static boolean checkStudent(String email, String password) {
-        // TODO check if user with specified information exists
-        return true;
-    }
-
-    public static Faculty loginFaculty(String email, String password) {
-        return null;
-    }
-
-    public static boolean checkFaculty(String email, String password) {
-        // TODO check if user with specified information exists
-        return true;
-    }
-
-    public static boolean isStudentValid(String firstName, String lastName, String email, String password) {
-        if (!email.contains("@")) {
+    public boolean isStudentValid(Student student) {
+        if (!student.getEmail().contains("@")) {
             return false;
         }
-        // TODO check if email is already in db
         return true;
     }
 }

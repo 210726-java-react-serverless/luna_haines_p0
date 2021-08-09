@@ -1,5 +1,7 @@
 package com.revature.registration.screens;
 
+import com.revature.registration.models.Student;
+import com.revature.registration.services.UserServices;
 import com.revature.registration.util.AppState;
 import com.revature.registration.util.ScreenRouter;
 
@@ -7,8 +9,13 @@ import java.io.BufferedReader;
 
 public class StudentDashboard extends Screen {
 
-    public StudentDashboard(BufferedReader consoleReader, ScreenRouter router) {
+    private final UserServices userServices;
+    public Student student;
+
+    public StudentDashboard(BufferedReader consoleReader, ScreenRouter router, UserServices userServices, Student student) {
         super("Student Dashboard", "student", consoleReader, router);
+        this.userServices = userServices;
+        this.student = student;
     }
 
     @Override
@@ -48,9 +55,9 @@ public class StudentDashboard extends Screen {
                 break;
             case 5:
                 System.out.println("User Info:");
-                LoginScreen.student.getFirstName();
-                LoginScreen.student.getLastName();
-                LoginScreen.student.getEmail();
+                student.getFirstName();
+                student.getLastName();
+                student.getEmail();
                 break;
             case 6:
                 System.out.println("Exiting Application...");
