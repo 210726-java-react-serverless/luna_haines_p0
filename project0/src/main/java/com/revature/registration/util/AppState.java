@@ -1,8 +1,10 @@
 package com.revature.registration.util;
 
+import com.revature.registration.repositories.CourseRepository;
 import com.revature.registration.repositories.FacultyRepository;
 import com.revature.registration.repositories.StudentRepository;
 import com.revature.registration.screens.*;
+import com.revature.registration.services.CourseServices;
 import com.revature.registration.services.UserServices;
 
 import java.io.BufferedReader;
@@ -19,15 +21,17 @@ public class AppState {
 
         StudentRepository studentRepository = new StudentRepository();
         FacultyRepository facultyRepository = new FacultyRepository();
+        CourseRepository courseRepository = new CourseRepository();
         UserServices userServices = new UserServices(studentRepository,facultyRepository);
+        CourseServices courseServices = new CourseServices(courseRepository);
         Session user = Session.getInstance();
 
         router = new ScreenRouter();
         router.addScreen(new WelcomeScreen(consoleReader,router));
         router.addScreen(new LoginScreen(consoleReader,router,userServices));
         router.addScreen(new RegistrationScreen(consoleReader,router,userServices));
-        router.addScreen(new StudentDashboard(consoleReader,router,userServices,user.getStudent()));
-        router.addScreen(new FacultyDashboard(consoleReader,router,userServices,user.getFaculty()));
+        router.addScreen(new StudentDashboard(consoleReader,router,userServices,courseServices,user.getStudent()));
+        router.addScreen(new FacultyDashboard(consoleReader,router,userServices,courseServices,user.getFaculty()));
 
     }
 

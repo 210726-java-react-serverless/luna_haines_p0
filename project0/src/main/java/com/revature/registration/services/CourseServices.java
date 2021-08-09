@@ -27,7 +27,7 @@ public class CourseServices {
         return courseRepo.findByFaculty(faculty);
     }
 
-    public void registerForCourse(Student student) {
+    public void registerForCourse(Student student,String number) {
 
     }
 
