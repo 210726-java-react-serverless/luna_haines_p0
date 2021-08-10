@@ -171,7 +171,17 @@ public class CourseRepository{
         return true;
     }
 
-    // TODO add addStudent method
+
+    public boolean addStudent(String courseNumber, String email) {
+        MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
+        MongoDatabase courseDb = mongoClient.getDatabase("p0");
+        MongoCollection courseCollection = courseDb.getCollection("course");
+
+        // TODO add try/catch block to catch exception thrown if student already in set
+        courseCollection.updateOne(Filters.eq("number",courseNumber),
+                Updates.addToSet("students",email));
+        return true;
+    }
     // TODO add removeStudent method
 
     public boolean deleteByNumber(String number) {
