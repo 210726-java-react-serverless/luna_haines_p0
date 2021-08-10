@@ -12,12 +12,16 @@ import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
 import com.revature.registration.util.ConnectionFactory;
 import com.revature.registration.util.exceptions.DataSourceException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bson.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CourseRepository{
+
+    private final Logger logger = LogManager.getLogger(CourseRepository.class);
 
     public Course save(Course newCourse) {
         MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
@@ -49,10 +53,10 @@ public class CourseRepository{
 
             return course;
         } catch (JsonMappingException jme) {
-            jme.printStackTrace();
+            logger.debug(jme.getMessage());
             throw new DataSourceException("An exception occurred while mapping the Document",jme);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e.getMessage());
             throw new DataSourceException("An unexpected exception occurred",e);
         }
     }
@@ -71,10 +75,10 @@ public class CourseRepository{
 
             return course;
         } catch (JsonMappingException jme) {
-            jme.printStackTrace();
+            logger.debug(jme.getMessage());
             throw new DataSourceException("An exception occurred while mapping the Document",jme);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e.getMessage());
             throw new DataSourceException("An unexpected exception occurred",e);
         }
     }
@@ -94,10 +98,10 @@ public class CourseRepository{
             }
             return registeredCourses;
         } catch (JsonMappingException jme) {
-            jme.printStackTrace();
+            logger.debug(jme.getMessage());
             throw new DataSourceException("An exception occurred while mapping the Document",jme);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e.getMessage());
             throw new DataSourceException("An unexpected exception occurred",e);
         }
     }
@@ -121,10 +125,10 @@ public class CourseRepository{
             }
             return taughtCourses;
         } catch (JsonMappingException jme) {
-            jme.printStackTrace();
+            logger.debug(jme.getMessage());
             throw new DataSourceException("An exception occurred while mapping the Document",jme);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e.getMessage());
             throw new DataSourceException("An unexpected exception occurred",e);
         }
     }
@@ -144,10 +148,10 @@ public class CourseRepository{
             }
             return courseList;
         } catch (JsonMappingException jme) {
-            jme.printStackTrace();
+            logger.debug(jme.getMessage());
             throw new DataSourceException("An exception occurred while mapping the Document",jme);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e.getMessage());
             throw new DataSourceException("An unexpected exception occurred",e);
         }
     }

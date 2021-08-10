@@ -7,11 +7,15 @@ import com.revature.registration.services.UserServices;
 import com.revature.registration.util.AppState;
 import com.revature.registration.util.ScreenRouter;
 import com.revature.registration.util.Session;
+import com.revature.registration.util.exceptions.InvalidInformationException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 
 public class FacultyDashboard extends Screen {
 
+    private final Logger logger = LogManager.getLogger(FacultyDashboard.class);
     private final UserServices userServices;
     private final CourseServices courseServices;
     public Faculty faculty;
@@ -56,11 +60,16 @@ public class FacultyDashboard extends Screen {
                 System.out.println("Enter Course Capacity");
                 System.out.print("> ");
                 int capacity = Integer.parseInt(consoleReader.readLine());
-
-                Course newCourse = new Course(number,name,description,professorEmail,capacity);
-                courseServices.createCourse(newCourse);
-
-                break;
+                try {
+                    Course newCourse = new Course(number, name, description, professorEmail, capacity);
+                    courseServices.createCourse(newCourse);
+                    logger.info("Course successfully added");
+                } catch (InvalidInformationException iie) {
+                    logger.error(iie.getMessage());
+                    logger.debug("Course not added");
+                } finally {
+                    break;
+                }
             case 2:
                 System.out.println("Update a Course");
 

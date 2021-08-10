@@ -11,9 +11,13 @@ import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
 import com.revature.registration.util.ConnectionFactory;
 import com.revature.registration.util.exceptions.DataSourceException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.bson.Document;
 
 public class StudentRepository implements CrudRepository<Student>{
+
+    private final Logger logger = LogManager.getLogger(StudentRepository.class);
 
     @Override
     public Student save(Student newStudent) {
@@ -47,10 +51,10 @@ public class StudentRepository implements CrudRepository<Student>{
 
             return student;
         } catch (JsonMappingException jme) {
-            jme.printStackTrace();
+            logger.debug(jme.getMessage());
             throw new DataSourceException("An exception occurred while mapping the Document",jme);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e.getMessage());
             throw new DataSourceException("An unexpected exception occurred",e);
         }
     }
@@ -70,10 +74,10 @@ public class StudentRepository implements CrudRepository<Student>{
 
             return student;
         } catch (JsonMappingException jme) {
-            jme.printStackTrace();
+            logger.debug(jme.getMessage());
             throw new DataSourceException("An exception occurred while mapping the Document",jme);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e.getMessage());
             throw new DataSourceException("An unexpected exception occurred",e);
         }
     }
@@ -97,10 +101,10 @@ public class StudentRepository implements CrudRepository<Student>{
 
             return student;
         } catch (JsonMappingException jme) {
-            jme.printStackTrace();
+            logger.debug(jme.getMessage());
             throw new DataSourceException("An exception occurred while mapping the Document",jme);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.debug(e.getMessage());
             throw new DataSourceException("An unexpected exception occurred",e);
         }
     }
@@ -123,7 +127,6 @@ public class StudentRepository implements CrudRepository<Student>{
         return true;
     }
 
-    // method is never used
     @Override
     public boolean deleteById(String id) {
         // TODO remove student from courses

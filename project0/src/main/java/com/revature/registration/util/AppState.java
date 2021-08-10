@@ -6,12 +6,15 @@ import com.revature.registration.repositories.StudentRepository;
 import com.revature.registration.screens.*;
 import com.revature.registration.services.CourseServices;
 import com.revature.registration.services.UserServices;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
 public class AppState {
 
+    private final Logger logger = LogManager.getLogger(AppState.class);
     private static boolean appRunning;
     private ScreenRouter router;
 
@@ -43,7 +46,8 @@ public class AppState {
             try {
                 router.getCurrentScreen().render();
             } catch (Exception e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
+                logger.debug("an error occurred while routing");
             }
 
         }

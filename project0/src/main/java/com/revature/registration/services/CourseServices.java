@@ -5,12 +5,16 @@ import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
 import com.revature.registration.repositories.CourseRepository;
 import com.revature.registration.util.Session;
+import com.revature.registration.util.exceptions.DataSourceException;
 import com.revature.registration.util.exceptions.InvalidInformationException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class CourseServices {
 
+    private final Logger logger = LogManager.getLogger(CourseServices.class);
     private CourseRepository courseRepo;
 
     public CourseServices(CourseRepository courseRepo) {
@@ -18,26 +22,35 @@ public class CourseServices {
     }
 
     public Course createCourse(Course newCourse) {
-        try {
-            isCourseValid(newCourse);
-        } catch (InvalidInformationException iie) {
-            iie.printStackTrace();
-            System.out.println(iie.getMessage());
-        }
-
+        isCourseValid(newCourse);
         return courseRepo.save(newCourse);
     }
 
     public List<Course> getCourseList() {
-        return courseRepo.findAll();
+        try {
+            return courseRepo.findAll();
+        } catch (DataSourceException dse) {
+            logger.error(dse.getMessage());
+        }
+        return null;
     }
 
     public List<Course> getRegisteredCourses(Student student) {
-        return courseRepo.findByStudent(student);
+        try {
+            return courseRepo.findByStudent(student);
+        } catch (DataSourceException dse) {
+            logger.error(dse.getMessage());
+        }
+        return null;
     }
 
     public List<Course> getTaughtCourses(Faculty faculty) {
-        return courseRepo.findByFaculty(faculty);
+        try {
+            return courseRepo.findByFaculty(faculty);
+        } catch (DataSourceException dse) {
+            logger.error(dse.getMessage());
+        }
+        return null;
     }
 
     public void registerForCourse(String number, Student student) {
