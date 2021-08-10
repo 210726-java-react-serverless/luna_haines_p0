@@ -46,10 +46,20 @@ public class UserServices {
         return faculty;
     }
 
-    public boolean isStudentValid(Student student) {
+    public boolean isStudentValid(Student student) throws InvalidInformationException{
         if (!student.getEmail().contains("@")) {
-            return false;
+            throw new InvalidInformationException("Email provided was not a valid email");
         }
+        if (student.getPassword().length()<4) {
+            throw new InvalidInformationException("Password provided was not long enough");
+        }
+        if (student.getFirstName() == null || student.getLastName() == null || student.getEmail() == null ||
+                student.getPassword() == null || student.getFirstName().equals("") ||
+                student.getLastName().equals("") || student.getEmail().equals("") || student.getPassword().equals("")) {
+
+            throw new InvalidInformationException("No field can be left blank");
+        }
+
         return true;
     }
 }
