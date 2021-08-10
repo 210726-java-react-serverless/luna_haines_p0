@@ -81,6 +81,14 @@ public class Course {
         this.professor = professor;
     }
 
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
     public String[] getStudents() {
         return students;
     }
