@@ -18,14 +18,14 @@ public class StudentDashboard extends Screen {
 
     public StudentDashboard(BufferedReader consoleReader, ScreenRouter router, UserServices userServices,
                             CourseServices courseServices) {
-        super("Student Dashboard", "student", consoleReader, router);
+        super("Student Dashboard", "/studentdashboard", consoleReader, router);
         this.userServices = userServices;
         this.courseServices = courseServices;
     }
 
     @Override
     public void render() throws Exception {
-        Session.getInstance().getStudent();
+        Student student = Session.getInstance().getStudent();
         System.out.println( "Student Dashboard\n" +
                             "1) View Course List\n" +
                             "2) Register for a Course\n" +
@@ -36,7 +36,7 @@ public class StudentDashboard extends Screen {
         System.out.print("> ");
         String userChoice = consoleReader.readLine();
 
-        // TODO write and implement CRUD operation from courseServices
+
         switch (Integer.parseInt(userChoice)) {
             case 1:
                 System.out.println("Course List:");
@@ -47,18 +47,18 @@ public class StudentDashboard extends Screen {
             case 2:
                 System.out.println("Enter Course Number: ");
                 String courseRegNumber = consoleReader.readLine();
-                courseServices.registerForCourse(student,courseRegNumber);
+                courseServices.registerForCourse(courseRegNumber,student);
                 break;
             case 3:
                 System.out.println("Your Registered Courses:");
-                System.out.println(courseServices.getRegisteredCourses(student));
-                System.out.println("Press enter to continue:");
-                consoleReader.readLine();
+                for ( Course c : courseServices.getRegisteredCourses(student)) {
+                    System.out.println(c.toString());
+                }
                 break;
             case 4:
                 System.out.println("Enter Course Number:");
                 String courseDelNumber = consoleReader.readLine();
-                courseServices.removeFromCourse(student,courseDelNumber);
+                courseServices.removeFromCourse(courseDelNumber,student);
                 break;
             case 5:
                 System.out.println("User Info:");
