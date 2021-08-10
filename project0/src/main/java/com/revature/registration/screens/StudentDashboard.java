@@ -25,6 +25,7 @@ public class StudentDashboard extends Screen {
 
     @Override
     public void render() throws Exception {
+        System.out.println("----------------------------");
         Student student = Session.getInstance().getStudent();
         System.out.println( "Student Dashboard\n" +
                             "1) View Course List\n" +

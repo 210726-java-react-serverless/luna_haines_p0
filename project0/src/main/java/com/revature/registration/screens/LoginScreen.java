@@ -20,6 +20,7 @@ public class LoginScreen extends Screen {
 
     @Override
     public void render() throws Exception {
+        System.out.println("----------------------------");
         System.out.println("Login Screen:\n" +
                 "1) Faculty\n" +
                 "2) Student");

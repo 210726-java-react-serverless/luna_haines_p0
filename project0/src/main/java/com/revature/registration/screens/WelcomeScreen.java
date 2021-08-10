@@ -14,6 +14,7 @@ public class WelcomeScreen extends Screen {
 
     @Override
     public void render() throws Exception {
+        System.out.println("----------------------------");
         System.out.println(
                 "Course Management:\n" +
                 "1) Login\n" +

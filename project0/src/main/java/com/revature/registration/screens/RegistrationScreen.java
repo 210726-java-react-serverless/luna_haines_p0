@@ -19,6 +19,7 @@ public class RegistrationScreen extends Screen {
 
     @Override
     public void render() throws Exception {
+        System.out.println("----------------------------");
         System.out.println("Register a new student account:");
 
         System.out.println("First Name: ");
