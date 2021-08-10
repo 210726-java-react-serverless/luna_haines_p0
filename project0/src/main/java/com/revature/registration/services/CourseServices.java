@@ -32,12 +32,12 @@ public class CourseServices {
         return courseRepo.findByFaculty(faculty);
     }
 
-    public void registerForCourse(Student student,String number) {
-        // TODO write this method, probably need a new update method in CourseRepository
+    public void registerForCourse(String number, Student student) {
+        courseRepo.addStudent(number,student.getEmail());
     }
 
-    public  void removeFromCourse(Student student,String number) {
-        // TODO write this method, probably need a new update method in CourseRepository
+    public  void removeFromCourse(String number, Student student) {
+        courseRepo.removeStudent(number,student.getEmail());
     }
 
     public boolean updateCourse(String currentNumber,String field, String newValue) {
@@ -46,11 +46,6 @@ public class CourseServices {
 
     public boolean removeCourse(String number) {
         return courseRepo.deleteByNumber(number);
-    }
-
-    private boolean isCourseOpen() {
-        // TODO check course capacity against # of students registered
-        return false;
     }
 
 }
