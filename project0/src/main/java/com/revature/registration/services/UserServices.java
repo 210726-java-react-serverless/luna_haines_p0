@@ -40,6 +40,7 @@ public class UserServices {
     }
 
     public boolean isStudentValid(Student student) throws InvalidInformationException{
+        System.out.println(student.toString());
         if (!student.getEmail().contains("@")) {
             throw new InvalidInformationException("Email provided was not a valid email");
         }

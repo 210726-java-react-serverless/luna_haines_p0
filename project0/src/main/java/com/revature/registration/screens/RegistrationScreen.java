@@ -38,7 +38,12 @@ public class RegistrationScreen extends Screen {
         System.out.println("Password: ");
         String password = consoleReader.readLine();
 
-        Student newStudent = new Student(firstName,lastName,email,password);
+        Student newStudent = new Student();
+        newStudent.setFirstName(firstName);
+        newStudent.setLastName(lastName);
+        newStudent.setEmail(email);
+        newStudent.setPassword(password);
+        System.out.println(newStudent.toString());
         try {
             userServices.registerStudent(newStudent);
             logger.info("New student registered");
@@ -46,6 +51,8 @@ public class RegistrationScreen extends Screen {
         } catch (InvalidInformationException iie) {
             logger.error(iie.getMessage());
             logger.debug("Student was not registered");
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             router.navigate("/welcome");
         }

@@ -68,6 +68,10 @@ public class StudentRepository implements CrudRepository<Student>{
             Document queryDoc = new Document("email", email);
             Document returnDoc = studentCollection.find(queryDoc).first();
 
+            if (returnDoc == null) {
+                return null;
+            }
+
             ObjectMapper mapper = new ObjectMapper();
             Student student = mapper.readValue(returnDoc.toJson(), Student.class);
             student.setId(returnDoc.get("_id").toString());

@@ -17,5 +17,6 @@ public class Student extends User {
         this.lastName = lastName;
         this.email = email;
         this.password = password;
+        this.id = "0";
     }
 }
