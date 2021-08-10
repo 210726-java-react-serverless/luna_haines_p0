@@ -55,6 +55,29 @@ public class StudentRepository implements CrudRepository<Student>{
         }
     }
 
+    public Student findByEmail(String email) {
+        try {
+            // TODO obfuscate dbName and collectionName with properties
+            MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
+            MongoDatabase studentDb = mongoClient.getDatabase("p0");
+            MongoCollection<Document> studentCollection = studentDb.getCollection("student");
+            Document queryDoc = new Document("email", email);
+            Document returnDoc = studentCollection.find(queryDoc).first();
+
+            ObjectMapper mapper = new ObjectMapper();
+            Student student = mapper.readValue(returnDoc.toJson(), Student.class);
+            student.setId(returnDoc.get("_id").toString());
+
+            return student;
+        } catch (JsonMappingException jme) {
+            jme.printStackTrace();
+            throw new DataSourceException("An exception occurred while mapping the Document",jme);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new DataSourceException("An unexpected exception occurred",e);
+        }
+    }
+
     public Student findByCredentials(String email,String password) {
         try {
             // TODO obfuscate dbName and collectionName with properties

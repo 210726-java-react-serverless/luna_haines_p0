@@ -18,14 +18,7 @@ public class UserServices {
 
 
     public Student registerStudent(Student student) {
-        if (!isStudentValid(student)) {
-            throw new InvalidInformationException("The information (i.e. first name, last name, email, or password)" +
-                    " you provided is not valid.");
-        }
-        if (studentRepo.findById(student.getId()) != null) {
-            throw new InvalidInformationException("That email is already registered with this application.");
-        }
-
+        isStudentValid(student);
         studentRepo.save(student);
         return student;
     }
@@ -58,6 +51,9 @@ public class UserServices {
                 student.getLastName().equals("") || student.getEmail().equals("") || student.getPassword().equals("")) {
 
             throw new InvalidInformationException("No field can be left blank");
+        }
+        if (studentRepo.findByEmail(student.getEmail()) != null) {
+            throw new InvalidInformationException("That email is already registered with this application.");
         }
 
         return true;
