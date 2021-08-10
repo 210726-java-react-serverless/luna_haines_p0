@@ -187,7 +187,7 @@ public class CourseRepository{
         MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
         MongoDatabase courseDb = mongoClient.getDatabase("p0");
         MongoCollection courseCollection = courseDb.getCollection("course");
-        
+
         courseCollection.updateOne(Filters.eq("number",courseNumber),Updates.pull("students",email));
         return true;
     }
