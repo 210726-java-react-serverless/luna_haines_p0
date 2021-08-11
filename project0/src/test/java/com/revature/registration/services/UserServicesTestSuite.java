@@ -1,6 +1,5 @@
 package com.revature.registration.services;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
 import com.revature.registration.repositories.FacultyRepository;
@@ -101,7 +100,7 @@ public class UserServicesTestSuite {
         sut.isStudentValid(invalidStudent);
     }
 
-    @Test
+    @Test(expected = InvalidInformationException.class)
     public void isStudentValid_checksForExistingEmails_whenEmailAlreadyRegistered() {
         // Arrange
         Student invalidStudent = new Student();
@@ -109,12 +108,15 @@ public class UserServicesTestSuite {
         invalidStudent.setLastName("feisty");
         invalidStudent.setEmail("peter.parker@asgard.net");
         invalidStudent.setPassword("validpass");
+        when(mockStudentRepo.findByEmail("peter.parker@asgard.net")).thenReturn(invalidStudent);
 
         // Act
-        boolean result = sut.isStudentValid(invalidStudent);
-
-        // Assert
-        verify(mockStudentRepo,times(1)).findByEmail(any());
+        try {
+            boolean result = sut.isStudentValid(invalidStudent);
+        } finally {
+            // Assert
+            verify(mockStudentRepo, times(1)).findByEmail(any());
+        }
     }
 
     @Test

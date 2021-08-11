@@ -54,7 +54,13 @@ public class CourseServices {
     }
 
     public void registerForCourse(String number, Student student) {
-        courseRepo.addStudent(number,student.getEmail());
+        try {
+            courseRepo.addStudent(number, student.getEmail());
+        } catch (Exception e) {
+            logger.error("A problem occurred while trying to add student to course list, " +
+                    "check that you aren't already registered");
+            throw new DataSourceException(e.getMessage(),e);
+        }
     }
 
     public  void removeFromCourse(String number, Student student) {

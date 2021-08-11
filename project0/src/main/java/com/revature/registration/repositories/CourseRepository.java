@@ -181,7 +181,6 @@ public class CourseRepository{
         MongoDatabase courseDb = mongoClient.getDatabase("p0");
         MongoCollection courseCollection = courseDb.getCollection("course");
 
-        // TODO add try/catch block to catch exception thrown if student already in set
         courseCollection.updateOne(Filters.eq("number",courseNumber),
                 Updates.addToSet("students",email));
         return true;
