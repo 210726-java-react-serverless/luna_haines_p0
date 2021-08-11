@@ -9,6 +9,10 @@ import com.revature.registration.util.ScreenRouter;
 import com.revature.registration.util.Session;
 import java.io.BufferedReader;
 
+/**
+ * StudentDashboard contains options for Students to perform CRUD operations involving Courses they are, or might
+ * want to be, registered for.
+ */
 public class StudentDashboard extends Screen {
 
     private final UserServices userServices;
@@ -22,6 +26,12 @@ public class StudentDashboard extends Screen {
         this.courseServices = courseServices;
     }
 
+    /**
+     * render() gives Students options to view the entire course list, register for a course, view courses they are
+     * registered for, cancel their registration for a course, view their user info, or exit. Each of these options
+     * collects information from the user to accurately perform the appropriate operations.
+     * @throws Exception
+     */
     @Override
     public void render() throws Exception {
         System.out.println("----------------------------");

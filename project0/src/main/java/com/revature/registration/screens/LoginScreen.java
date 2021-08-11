@@ -10,6 +10,10 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.BufferedReader;
 
+/**
+ * The LoginScreen uses UserServices to authenticate Faculty and Student users and navigates them to their
+ * respective dashboards.
+ */
 public class LoginScreen extends Screen {
 
     private final Logger logger = LogManager.getLogger(LoginScreen.class);
@@ -20,6 +24,12 @@ public class LoginScreen extends Screen {
         this.userServices = userServices;
     }
 
+    /**
+     * render includes method calls for authenticating users. It navigates them to the correct dashboard if they are
+     * able to be authenticated. If for any reason a user cannot be authenticated, then they are sent back to the
+     * welcome screen.
+     * @throws Exception
+     */
     @Override
     public void render() throws Exception {
         System.out.println("----------------------------");

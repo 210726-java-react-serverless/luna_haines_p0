@@ -8,6 +8,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.BufferedReader;
 
+/**
+ * The RegistrationScreen allows users to register as a new student in the system and have their data persisted.
+ */
 public class RegistrationScreen extends Screen {
 
     private final Logger logger = LogManager.getLogger(RegistrationScreen.class);
@@ -18,6 +21,11 @@ public class RegistrationScreen extends Screen {
         this.userServices = userServices;
     }
 
+    /**
+     * When render() is called it gathers user information then attempts to register the user. render() then handles
+     * success and failure before sending the user back to the welcome screen.
+     * @throws Exception
+     */
     @Override
     public void render() throws Exception {
         System.out.println("----------------------------");
