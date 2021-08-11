@@ -16,17 +16,10 @@ public class UserServices {
         this.facultyRepo = facultyRepo;
     }
 
-    // TODO connect to database with repository classes
-    public Student registerStudent(Student student) {
-        if (!isStudentValid(student)) {
-            throw new InvalidInformationException("The information (i.e. first name, last name, email, or password)" +
-                    " you provided is not valid.");
-        }
-        if (studentRepo.findById(student.getId()) != null) {
-            throw new InvalidInformationException("That email is already registered with this application.");
-        }
 
-        // TODO persist user to db
+    public Student registerStudent(Student student) {
+        isStudentValid(student);
+        studentRepo.save(student);
         return student;
     }
 
@@ -46,10 +39,26 @@ public class UserServices {
         return faculty;
     }
 
-    public boolean isStudentValid(Student student) {
-        if (!student.getEmail().contains("@")) {
-            return false;
+    public boolean isStudentValid(Student student) throws InvalidInformationException{
+        if (student.getFirstName() == null || student.getLastName() == null || student.getEmail() == null ||
+                student.getPassword() == null) {
+            throw new InvalidInformationException("No field can be null");
         }
+        if (!student.getEmail().contains("@")) {
+            throw new InvalidInformationException("Email provided was not a valid email");
+        }
+        if (student.getPassword().length()<4) {
+            throw new InvalidInformationException("Password provided was not long enough");
+        }
+        if (student.getFirstName().equals("") || student.getLastName().equals("") || student.getEmail().equals("") ||
+                student.getPassword().equals("")) {
+
+            throw new InvalidInformationException("No field can be left blank");
+        }
+        if (studentRepo.findByEmail(student.getEmail()) != null) {
+            throw new InvalidInformationException("That email is already registered with this application.");
+        }
+
         return true;
     }
 }

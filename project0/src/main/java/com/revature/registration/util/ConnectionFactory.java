@@ -6,7 +6,8 @@ import com.mongodb.ServerAddress;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.revature.registration.util.exceptions.DataSourceException;
-
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Collections;
@@ -15,6 +16,7 @@ import java.util.Properties;
 
 public class ConnectionFactory {
 
+    private final Logger logger = LogManager.getLogger(ConnectionFactory.class);
     private final MongoClient mongoClient;
     private static final ConnectionFactory connectionFactory = new ConnectionFactory();
 
@@ -40,10 +42,12 @@ public class ConnectionFactory {
             this.mongoClient = MongoClients.create(settings);
 
         } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace(); // TODO log this
+            logger.error(fnfe.getMessage());
+            logger.debug("Unable to load database properties file");
             throw new DataSourceException("Unable to load database properties file",fnfe);
         } catch (Exception e) {
-            e.printStackTrace(); // TODO log this
+            logger.error(e.getMessage());
+            logger.debug("an unexpected problem occurred when establishing database connection");
             throw new DataSourceException("An unexpected problem occurred", e);
         }
     }

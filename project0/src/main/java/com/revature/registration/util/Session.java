@@ -4,7 +4,7 @@ import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
 
 public class Session {
-    private static Session user = null;
+    private static Session user = new Session();
     private Student student;
     private Faculty faculty;
 

@@ -1,7 +1,6 @@
 package com.revature.registration.screens;
 
 import com.revature.registration.util.ScreenRouter;
-
 import java.io.BufferedReader;
 
 public abstract class Screen {
@@ -26,7 +25,6 @@ public abstract class Screen {
         return route;
     }
 
-    // TODO implement render() for remaining screens
     public abstract void render() throws Exception;
 
 }
