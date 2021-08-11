@@ -49,6 +49,7 @@ public class FacultyDashboard extends Screen {
         String userChoice = consoleReader.readLine();
 
         switch (Integer.parseInt(userChoice)) {
+            // add course
             case 1:
                 System.out.println("Add a Course");
                 System.out.println("Enter Course Number");
@@ -80,7 +81,7 @@ public class FacultyDashboard extends Screen {
                     logger.debug("Course not added");
                 }
                 break;
-
+            // update a course
             case 2:
                 System.out.println("Update a Course");
 
@@ -103,6 +104,7 @@ public class FacultyDashboard extends Screen {
                 }
                 courseServices.updateCourse(currentNumber,field,newValue);
                 break;
+            // delete course
             case 3:
                 System.out.println("Remove a Course");
                 System.out.println("Enter Course Number:");
@@ -111,6 +113,7 @@ public class FacultyDashboard extends Screen {
 
                 courseServices.removeCourse(removeCourseNumber);
                 break;
+            // view user info, including courses taught
             case 4:
                 System.out.println("User Info:");
                 System.out.println(faculty.getFirstName());
@@ -121,8 +124,8 @@ public class FacultyDashboard extends Screen {
                     System.out.println("displaying course:");
                     System.out.println(c.toString());
                 }
-
                 break;
+            // exit
             case 5:
                 System.out.println("Exiting Application");
                 AppState.shutdown();

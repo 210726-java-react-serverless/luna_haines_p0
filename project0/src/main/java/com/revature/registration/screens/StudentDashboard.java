@@ -48,34 +48,40 @@ public class StudentDashboard extends Screen {
 
 
         switch (Integer.parseInt(userChoice)) {
+            // view entire course list
             case 1:
                 System.out.println("Course List:");
                 for (Course c : courseServices.getCourseList()) {
                     System.out.println(c.toString());
                 }
                 break;
+            // register for a course
             case 2:
                 System.out.println("Enter Course Number: ");
                 String courseRegNumber = consoleReader.readLine();
                 courseServices.registerForCourse(courseRegNumber,student);
                 break;
+            // view registered courses
             case 3:
                 System.out.println("Your Registered Courses:");
                 for ( Course c : courseServices.getRegisteredCourses(student)) {
                     System.out.println(c.toString());
                 }
                 break;
+            // unregister
             case 4:
                 System.out.println("Enter Course Number:");
                 String courseDelNumber = consoleReader.readLine();
                 courseServices.removeFromCourse(courseDelNumber,student);
                 break;
+            // view user info
             case 5:
                 System.out.println("User Info:");
                 System.out.println(student.getFirstName());
                 System.out.println(student.getLastName());
                 System.out.println(student.getEmail());
                 break;
+            // exit
             case 6:
                 System.out.println("Exiting Application...");
                 AppState.shutdown();

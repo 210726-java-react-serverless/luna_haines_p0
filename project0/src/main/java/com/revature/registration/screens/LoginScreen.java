@@ -46,12 +46,14 @@ public class LoginScreen extends Screen {
         String password = consoleReader.readLine();
         try {
             switch (userType) {
+                // faculty
                 case 1:
                     Faculty faculty = userServices.loginFaculty(email, password);
                     Session.getInstance().setFaculty(faculty);
                     logger.info("Successfully logged in");
                     router.navigate("/facultydashboard");
                     break;
+                // student
                 case 2:
                     Student student = userServices.loginStudent(email, password);
                     Session.getInstance().setStudent(student);
