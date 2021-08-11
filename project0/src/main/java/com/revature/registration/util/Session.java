@@ -3,6 +3,10 @@ package com.revature.registration.util;
 import com.revature.registration.models.Faculty;
 import com.revature.registration.models.Student;
 
+/**
+ * Session is a singleton class that stores user information. Specifically, it stores the User (Student or Faculty)
+ * after they login.
+ */
 public class Session {
     private static Session user = new Session();
     private Student student;

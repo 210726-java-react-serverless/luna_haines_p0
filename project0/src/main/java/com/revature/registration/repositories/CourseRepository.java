@@ -18,10 +18,20 @@ import org.bson.Document;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * CourseRepository communicates between CourseServices and the Course Collection in the database. Its methods
+ * allow for creating, reading, updating, and deleting data about Courses that can be registered for.
+ */
 public class CourseRepository{
 
     private final Logger logger = LogManager.getLogger(CourseRepository.class);
 
+    /**
+     * save takes in a Course and persists it to the database. it returns the Course that it just saved, including
+     * the id MongoDB generates automatically ("_id" in MongoDB)
+     * @param newCourse
+     * @return
+     */
     public Course save(Course newCourse) {
         MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
         MongoDatabase courseDb = mongoClient.getDatabase("p0");
@@ -39,6 +49,12 @@ public class CourseRepository{
         return newCourse;
     }
 
+    /**
+     * findById takes in a Course's id and returns the object in the Course collection with that id. If no object
+     * with that id exists, it returns null.
+     * @param id
+     * @return
+     */
     public Course findById(String id) {
         try {
             MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
@@ -46,6 +62,10 @@ public class CourseRepository{
             MongoCollection<Document> courseCollection = courseDb.getCollection("course");
             Document query = new Document("_id", id);
             Document result = courseCollection.find(query).first();
+
+            if (result ==  null) {
+                return null;
+            }
 
             ObjectMapper mapper = new ObjectMapper();
             Course course = mapper.readValue(result.toJson(), Course.class);
@@ -61,6 +81,12 @@ public class CourseRepository{
         }
     }
 
+    /**
+     * findByNumber takes in a string that is a course number (i.e. "math 120", "cs 200") and finds the first course
+     * associated with that number in the database. It returns the Course it finds, or null or no Courses were found.
+     * @param number
+     * @return
+     */
     public Course findByNumber(String number) {
         try {
             MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
@@ -68,6 +94,10 @@ public class CourseRepository{
             MongoCollection<Document> courseCollection = courseDb.getCollection("course");
             Document query = new Document("number",number);
             Document result = courseCollection.find(query).first();
+
+            if (result == null) {
+                return null;
+            }
 
             ObjectMapper mapper = new ObjectMapper();
             Course course = mapper.readValue(result.toJson(),Course.class);
@@ -83,6 +113,12 @@ public class CourseRepository{
         }
     }
 
+    /**
+     * findByStudent takes in a Student and finds all Courses that they are registered for. It returns a List of
+     * Courses, which is empty if a Student is not registered for any Courses
+     * @param student
+     * @return
+     */
     public List<Course> findByStudent(Student student) {
         try {
             MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
@@ -106,6 +142,12 @@ public class CourseRepository{
         }
     }
 
+    /**
+     * findByFaculty finds all Courses taught by a particular Faculty. Those Courses are returned in a List,
+     * which is empty if a Faculty does not teach any Courses.
+     * @param faculty
+     * @return
+     */
     public List<Course> findByFaculty(Faculty faculty) {
         try {
             MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
@@ -132,6 +174,10 @@ public class CourseRepository{
         }
     }
 
+    /**
+     * findAll() returns the entire Course collection in a List.
+     * @return
+     */
     public List<Course> findAll() {
         try {
             MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
@@ -155,6 +201,14 @@ public class CourseRepository{
         }
     }
 
+    /**
+     * update takes in a course number, which it uses to find the course to change the value
+     * of a specified field to newValue.
+     * @param currentNumber
+     * @param field
+     * @param newValue
+     * @return
+     */
     public boolean update(String currentNumber, String field, String newValue) {
         MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
         MongoDatabase courseDb = mongoClient.getDatabase("p0");
@@ -174,7 +228,12 @@ public class CourseRepository{
         return true;
     }
 
-
+    /**
+     * addStudent registers a student, referenced by their email, for a course specified by a course number.
+     * @param courseNumber
+     * @param email
+     * @return
+     */
     public boolean addStudent(String courseNumber, String email) {
         MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
         MongoDatabase courseDb = mongoClient.getDatabase("p0");
@@ -185,6 +244,13 @@ public class CourseRepository{
         return true;
     }
 
+    /**
+     * removeStudent unregisters a student, referenced by their email,
+     * from a particular course, specified by a course number
+     * @param courseNumber
+     * @param email
+     * @return
+     */
     public boolean removeStudent(String courseNumber, String email) {
         MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
         MongoDatabase courseDb = mongoClient.getDatabase("p0");
@@ -194,6 +260,11 @@ public class CourseRepository{
         return true;
     }
 
+    /**
+     * deleteByNumber removes a Course from the course list, searching by its course number.
+     * @param number
+     * @return
+     */
     public boolean deleteByNumber(String number) {
         MongoClient mongoClient = ConnectionFactory.getInstance().getConnection();
         MongoDatabase courseDb = mongoClient.getDatabase("p0");

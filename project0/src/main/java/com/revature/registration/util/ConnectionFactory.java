@@ -14,6 +14,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * ConnectionFactory is a singleton class that houses connections to the database.
+ */
 public class ConnectionFactory {
 
     private final Logger logger = LogManager.getLogger(ConnectionFactory.class);
@@ -52,14 +55,25 @@ public class ConnectionFactory {
         }
     }
 
+    /**
+     * cleanUp() closes the mongo client, which is required for ideal shutdown.
+     */
     public void cleanUp() {
         mongoClient.close();
     }
 
+    /**
+     * getInstance returns the instance of connectionFactory so that other methods can be called on it.
+     * @return
+     */
     public static ConnectionFactory getInstance() {
         return connectionFactory;
     }
 
+    /**
+     * getConnection() returns the connection to the mongo database that ConnectionFactory set up.
+     * @return
+     */
     public MongoClient getConnection() {
         return mongoClient;
     }

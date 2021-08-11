@@ -12,6 +12,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.BufferedReader;
 
+/**
+ * the FacultyDashboard is where Faculty the have successfully logged in perform CRUD operations on Courses they teach.
+ */
 public class FacultyDashboard extends Screen {
 
     private final Logger logger = LogManager.getLogger(FacultyDashboard.class);
@@ -26,6 +29,12 @@ public class FacultyDashboard extends Screen {
         this.courseServices = courseServices;
     }
 
+    /**
+     * render displays the faculty dashboard. It includes options for adding, updating, and removing courses, along
+     * with viewing user info and exiting the application. These options contains calls to other methods to
+     * communicate with other parts of the application.
+     * @throws Exception
+     */
     @Override
     public void render() throws Exception {
         System.out.println("----------------------------");
@@ -69,9 +78,9 @@ public class FacultyDashboard extends Screen {
                 } catch (InvalidInformationException iie) {
                     logger.error(iie.getMessage());
                     logger.debug("Course not added");
-                } finally {
-                    break;
                 }
+                break;
+
             case 2:
                 System.out.println("Update a Course");
 

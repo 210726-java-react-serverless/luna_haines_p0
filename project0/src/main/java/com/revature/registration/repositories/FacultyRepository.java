@@ -14,10 +14,20 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.Document;
 
+/**
+ * The FacultyRepository Class connects with the collection in the database where Faculty are stored. Its methods
+ * are used by UserServices to communicate between the user and the database.
+ */
 public class FacultyRepository implements CrudRepository<Faculty>{
 
     private final Logger logger = LogManager.getLogger(FacultyRepository.class);
 
+    /**
+     * The save method takes in a Faculty object and persists that faculty to the database. It returns the Faculty
+     * that it saved, including the id that MongoDB assigned it ("_id" in MongoDB)
+     * @param newFaculty
+     * @return
+     */
     @Override
     public Faculty save(Faculty newFaculty) {
 
@@ -35,6 +45,12 @@ public class FacultyRepository implements CrudRepository<Faculty>{
         return newFaculty;
     }
 
+    /**
+     * findById takes in the id of a Faculty and returns the Faculty in the database with the matching id. If no such
+     * Faculty exists, findById returns null.
+     * @param id
+     * @return
+     */
     @Override
     public Faculty findById(String id) {
 
@@ -45,6 +61,10 @@ public class FacultyRepository implements CrudRepository<Faculty>{
             MongoCollection<Document> facultyCollection = facultyDb.getCollection("faculty");
             Document queryDoc = new Document("_id", id);
             Document returnDoc = facultyCollection.find(queryDoc).first();
+
+            if (returnDoc == null) {
+                return null;
+            }
 
             ObjectMapper mapper = new ObjectMapper();
             Faculty faculty = mapper.readValue(returnDoc.toJson(), Faculty.class);
@@ -60,6 +80,14 @@ public class FacultyRepository implements CrudRepository<Faculty>{
         }
     }
 
+    /**
+     * findByCredentials takes in two String arguments: an email and a password. Using these is queries the database
+     * for a Faculty with matching credentials. If a Faculty with matching credentials is found, then it is returned.
+     * Otherwise, findByCredentials returns null.
+     * @param email
+     * @param password
+     * @return
+     */
     public Faculty findByCredentials(String email, String password) {
 
         try {
@@ -88,6 +116,14 @@ public class FacultyRepository implements CrudRepository<Faculty>{
         }
     }
 
+    /**
+     * update takes in a Faculty object to update, along with the field to update and the newValue to update it to.
+     * update returns false if it tries to update an email to one that is already taken, otherwise it returns true.
+     * @param updateFaculty
+     * @param field
+     * @param newValue
+     * @return
+     */
     @Override
     public boolean update(Faculty updateFaculty,String field,String newValue) {
 
@@ -105,7 +141,12 @@ public class FacultyRepository implements CrudRepository<Faculty>{
         return true;
     }
 
-    // method is never used
+    /**
+     * deleteById takes in a Faculty's id and deletes the Faculty with the matching id from the database. It returns
+     * true upon successful deletion, or if no document with a matching id was in the database.
+     * @param id
+     * @return
+     */
     @Override
     public boolean deleteById(String id) {
 

@@ -11,6 +11,11 @@ import org.apache.logging.log4j.Logger;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+/**
+ * the AppState stores vital information for the app to run, including components such as the ScreenRouter and Screens.
+ * AppState sets up Screens and the ScreenRouter in its constructor, and has methods for starting and shutting down
+ * the app.
+ */
 public class AppState {
 
     private final Logger logger = LogManager.getLogger(AppState.class);
@@ -37,6 +42,10 @@ public class AppState {
 
     }
 
+    /**
+     * startup() starts the app by navigating to the Welcome Screen and running the app in a while loop, rendering and
+     * changing the current screen.
+     */
     public void startup() {
 
         router.navigate("/welcome");
@@ -52,6 +61,10 @@ public class AppState {
         }
     }
 
+    /**
+     * shutdown() cleans up the MongoClient and ends the while loop in startup(), allowing the program to fall through
+     * to the end of the main() method in App.
+     */
     public static void shutdown() {
         ConnectionFactory.getInstance().cleanUp();
         appRunning = false;
