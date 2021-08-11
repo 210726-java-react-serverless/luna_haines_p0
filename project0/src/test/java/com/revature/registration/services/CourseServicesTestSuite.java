@@ -210,5 +210,5 @@ public class CourseServicesTestSuite {
         // Assert
         Assert.assertTrue(!result);
     }
-    
+
 }

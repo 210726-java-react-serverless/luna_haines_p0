@@ -1,7 +1,6 @@
 package com.revature.registration.util;
 
 import com.revature.registration.screens.Screen;
-
 import java.util.HashSet;
 import java.util.Set;
 

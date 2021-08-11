@@ -1,10 +1,8 @@
 package com.revature.registration.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-
 import java.util.Objects;
 
 @JsonIgnoreProperties(ignoreUnknown = true)

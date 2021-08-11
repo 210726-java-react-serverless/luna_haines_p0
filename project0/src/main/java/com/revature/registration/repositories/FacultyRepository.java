@@ -1,6 +1,5 @@
 package com.revature.registration.repositories;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.client.MongoClient;
@@ -11,13 +10,9 @@ import com.mongodb.client.model.Updates;
 import com.revature.registration.models.Faculty;
 import com.revature.registration.util.ConnectionFactory;
 import com.revature.registration.util.exceptions.DataSourceException;
-import com.revature.registration.util.exceptions.InvalidInformationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.Document;
-import org.bson.conversions.Bson;
-
-import javax.print.Doc;
 
 public class FacultyRepository implements CrudRepository<Faculty>{
 

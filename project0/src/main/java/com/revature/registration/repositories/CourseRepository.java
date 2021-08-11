@@ -15,7 +15,6 @@ import com.revature.registration.util.exceptions.DataSourceException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.bson.Document;
-
 import java.util.ArrayList;
 import java.util.List;
 

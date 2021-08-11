@@ -1,15 +1,12 @@
 package com.revature.registration.screens;
 
 import com.revature.registration.models.Student;
-import com.revature.registration.models.User;
 import com.revature.registration.services.UserServices;
 import com.revature.registration.util.ScreenRouter;
 import com.revature.registration.util.exceptions.InvalidInformationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.BufferedReader;
-import java.sql.SQLOutput;
 
 public class RegistrationScreen extends Screen {
 
@@ -43,7 +40,7 @@ public class RegistrationScreen extends Screen {
         newStudent.setLastName(lastName);
         newStudent.setEmail(email);
         newStudent.setPassword(password);
-        System.out.println(newStudent.toString());
+        System.out.println(newStudent);
         try {
             userServices.registerStudent(newStudent);
             logger.info("New student registered");

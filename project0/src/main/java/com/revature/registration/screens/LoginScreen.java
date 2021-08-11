@@ -8,7 +8,6 @@ import com.revature.registration.util.Session;
 import com.revature.registration.util.exceptions.AuthenticationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.BufferedReader;
 
 public class LoginScreen extends Screen {

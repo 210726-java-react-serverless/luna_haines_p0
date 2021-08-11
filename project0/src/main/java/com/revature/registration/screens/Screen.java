@@ -1,7 +1,6 @@
 package com.revature.registration.screens;
 
 import com.revature.registration.util.ScreenRouter;
-
 import java.io.BufferedReader;
 
 public abstract class Screen {

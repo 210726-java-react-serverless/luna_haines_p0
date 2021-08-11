@@ -8,7 +8,6 @@ import com.revature.registration.services.CourseServices;
 import com.revature.registration.services.UserServices;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 

@@ -7,7 +7,6 @@ import com.revature.registration.services.UserServices;
 import com.revature.registration.util.AppState;
 import com.revature.registration.util.ScreenRouter;
 import com.revature.registration.util.Session;
-
 import java.io.BufferedReader;
 
 public class StudentDashboard extends Screen {

@@ -1,9 +1,7 @@
 package com.revature.registration.screens;
 
-import com.revature.registration.App;
 import com.revature.registration.util.AppState;
 import com.revature.registration.util.ScreenRouter;
-
 import java.io.BufferedReader;
 
 public class WelcomeScreen extends Screen {
