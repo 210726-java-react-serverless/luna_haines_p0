@@ -5,6 +5,10 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import java.util.Objects;
 
+/**
+ * User is an abstract class extended by Faculty and Student. It includes toString,equals,hashcode, and getters/setters
+ * which its subclasses inherit. The User Class also has important annotations for Jackson.
+ */
 @JsonIgnoreProperties(ignoreUnknown = true)
 public abstract class User {
 
