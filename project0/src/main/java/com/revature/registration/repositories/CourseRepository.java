@@ -30,6 +30,7 @@ public class CourseRepository{
                 .append("name",newCourse.getName())
                 .append("description",newCourse.getDescription())
                 .append("professor",newCourse.getProfessor())
+                .append("capacity",newCourse.getCapacity())
                 .append("students",newCourse.getStudents());
 
         courseCollection.insertOne(newCourseDoc);
@@ -113,7 +114,6 @@ public class CourseRepository{
             Document query = new Document("professor", faculty.getEmail());
             List<Document> result = courseCollection.find(query).into(new ArrayList<>());
 
-            // TODO result has no items in it. why???
             ObjectMapper mapper = new ObjectMapper();
             List<Course> taughtCourses = new ArrayList<>();
 

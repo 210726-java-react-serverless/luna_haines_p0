@@ -40,7 +40,6 @@ public class RegistrationScreen extends Screen {
         newStudent.setLastName(lastName);
         newStudent.setEmail(email);
         newStudent.setPassword(password);
-        System.out.println(newStudent);
         try {
             userServices.registerStudent(newStudent);
             logger.info("New student registered");

@@ -16,7 +16,7 @@ public class WelcomeScreen extends Screen {
         System.out.println(
                 "Course Management:\n" +
                 "1) Login\n" +
-                "2) Register New User\n" +
+                "2) Register New Student\n" +
                 "3) Exit Application");
         System.out.print("> ");
 

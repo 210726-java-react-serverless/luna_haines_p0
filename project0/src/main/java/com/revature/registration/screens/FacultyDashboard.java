@@ -54,14 +54,17 @@ public class FacultyDashboard extends Screen {
                 System.out.print("> ");
                 String description = consoleReader.readLine();
 
-                String professorEmail = faculty.getEmail();
-
                 System.out.println("Enter Course Capacity");
                 System.out.print("> ");
                 int capacity = Integer.parseInt(consoleReader.readLine());
                 try {
-                    Course newCourse = new Course(number, name, description, professorEmail, capacity);
-                    courseServices.createCourse(newCourse);
+                    Course addCourse = new Course();
+                    addCourse.setNumber(number);
+                    addCourse.setName(name);
+                    addCourse.setDescription(description);
+                    addCourse.setProfessor(faculty.getEmail());
+                    addCourse.setCapacity(capacity);
+                    courseServices.createCourse(addCourse);
                     logger.info("Course successfully added");
                 } catch (InvalidInformationException iie) {
                     logger.error(iie.getMessage());
