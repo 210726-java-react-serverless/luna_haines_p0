@@ -40,16 +40,18 @@ public class UserServices {
     }
 
     public boolean isStudentValid(Student student) throws InvalidInformationException{
-        System.out.println(student.toString());
+        if (student.getFirstName() == null || student.getLastName() == null || student.getEmail() == null ||
+                student.getPassword() == null) {
+            throw new InvalidInformationException("No field can be null");
+        }
         if (!student.getEmail().contains("@")) {
             throw new InvalidInformationException("Email provided was not a valid email");
         }
         if (student.getPassword().length()<4) {
             throw new InvalidInformationException("Password provided was not long enough");
         }
-        if (student.getFirstName() == null || student.getLastName() == null || student.getEmail() == null ||
-                student.getPassword() == null || student.getFirstName().equals("") ||
-                student.getLastName().equals("") || student.getEmail().equals("") || student.getPassword().equals("")) {
+        if (student.getFirstName().equals("") || student.getLastName().equals("") || student.getEmail().equals("") ||
+                student.getPassword().equals("")) {
 
             throw new InvalidInformationException("No field can be left blank");
         }
